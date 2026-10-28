@@ -1,0 +1,4 @@
+class a;
+class b extends a;
+metavar ?T;
+assert a <: object;

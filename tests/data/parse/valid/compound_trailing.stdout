@@ -1,0 +1,67 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 24,
+    },
+    decls: [
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 0,
+                    end: 23,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 7,
+                            end: 22,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 7,
+                                    end: 10,
+                                },
+                                name: "int",
+                            },
+                        ),
+                        right: Intersection(
+                            Nary {
+                                span: Span {
+                                    start: 14,
+                                    end: 22,
+                                },
+                                first: Name(
+                                    Ident {
+                                        span: Span {
+                                            start: 14,
+                                            end: 17,
+                                        },
+                                        name: "str",
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 18,
+                                        end: 19,
+                                    },
+                                    MetaName(
+                                        Ident {
+                                            span: Span {
+                                                start: 20,
+                                                end: 22,
+                                            },
+                                            name: "T",
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

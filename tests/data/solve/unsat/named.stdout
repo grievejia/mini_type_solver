@@ -1,0 +1,4 @@
+unsatisfiable
+core:
+  require_text
+  require_number

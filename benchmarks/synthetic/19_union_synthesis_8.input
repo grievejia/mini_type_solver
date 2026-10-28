@@ -1,0 +1,22 @@
+# verdict: satisfiable
+# Large union synthesis: eight unrelated lower bounds flow into one
+# variable. The model assigns ?U as the union of all eight
+# members in declaration order. Stresses bound-set growth and
+# canonical union rendering.
+class c0;
+class c1;
+class c2;
+class c3;
+class c4;
+class c5;
+class c6;
+class c7;
+metavar ?U;
+assert u0: c0 <: ?U;
+assert u1: c1 <: ?U;
+assert u2: c2 <: ?U;
+assert u3: c3 <: ?U;
+assert u4: c4 <: ?U;
+assert u5: c5 <: ?U;
+assert u6: c6 <: ?U;
+assert u7: c7 <: ?U;

@@ -1,0 +1,16 @@
+# verdict: unsatisfiable
+# Every upper choice accepts the callable parameter, but each return requires
+# unrelated C below a type made only from A and B.
+class A;
+class B;
+class C;
+metavar ?T;
+assert lower: (A | B) -> C <: ?T;
+assert upper: (?T <: (A) -> A)
+    or (?T <: (B) -> B)
+    or (?T <: (A & B) -> A)
+    or (?T <: (A & B) -> B)
+    or (?T <: (A | B) -> (A & B))
+    or (?T <: (A) -> (A | B))
+    or (?T <: (B) -> (A | B))
+    or (?T <: (A | B) -> (A | B));

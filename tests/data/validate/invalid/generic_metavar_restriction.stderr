@@ -1,0 +1,1 @@
+<input>:3:21: generic parameter restriction cannot contain metavariable `?T`

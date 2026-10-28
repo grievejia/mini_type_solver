@@ -1,0 +1,2 @@
+metavar ?T;
+assert tuple[?T] <: ?T;

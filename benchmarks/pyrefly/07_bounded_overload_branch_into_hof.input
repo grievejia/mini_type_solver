@@ -1,0 +1,39 @@
+# verdict: unsatisfiable
+# Source: pyrefly/lib/test/higher_order.rs:1375
+#   test_overloaded_argument_branch_respects_upper_bound
+# Pyrefly: `transform_all(["hello"], normalize)` is an error.
+# `transform_all([1], normalize)` gives list[int].
+#
+#   transform_all[T](items: list[T], transform: Callable[[T], T]) -> list[T]
+#   normalize: overload of [N: int](N) -> N and (bytes) -> bytes
+#
+# Each call gives T a fresh metavariable. list is invariant, so the list
+# element must equal T. `normalize` is an overloaded value checked against
+# (?T) -> ?T. Pyrefly accepts it if some signature fits, so this is an `or`
+# over the signatures. The generic signature keeps its `forall`: the solver
+# selects N and must then fit ?T inside the bound int.
+#
+# Overload order: the two signatures accept disjoint arguments (subtypes of
+# int, or bytes). Thus at most one signature fits, and first match gives the
+# same result as any match.
+#
+# For "hello", ?T is str, so neither signature fits. The core is the
+# "hello" call.
+# Approximation: each list display has its own type (list[str], list[int]).
+class int;
+class str;
+class bytes;
+class list[T];
+metavar ?hello_T;
+metavar ?one_T;
+
+# transform_all(["hello"], normalize)  -- error
+assert hello_items: list[str] <: list[?hello_T];
+assert hello_transform: (forall N <: int. (N) -> N <: (?hello_T) -> ?hello_T)
+    or ((bytes) -> bytes <: (?hello_T) -> ?hello_T);
+
+# assert_type(transform_all([1], normalize), list[int])
+assert one_items: list[int] <: list[?one_T];
+assert one_transform: (forall N <: int. (N) -> N <: (?one_T) -> ?one_T)
+    or ((bytes) -> bytes <: (?one_T) -> ?one_T);
+assert one_result: list[?one_T] <: list[int];

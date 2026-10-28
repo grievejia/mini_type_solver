@@ -1,0 +1,30 @@
+# verdict: satisfiable
+# Many unused classes: the constraints mention only base and leaf. Twenty
+# unrelated class declarations increase the environment size without changing
+# the constraint problem.
+class base;
+class leaf extends base;
+class unused00;
+class unused01;
+class unused02;
+class unused03;
+class unused04;
+class unused05;
+class unused06;
+class unused07;
+class unused08;
+class unused09;
+class unused10;
+class unused11;
+class unused12;
+class unused13;
+class unused14;
+class unused15;
+class unused16;
+class unused17;
+class unused18;
+class unused19;
+metavar ?T;
+metavar ?U;
+assert choose: leaf <: ?T | ?U;
+assert upper: ?T <: base;

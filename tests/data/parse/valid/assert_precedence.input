@@ -1,0 +1,2 @@
+assert (int <: ?T or str <: ?T) and ?T <: object;
+assert int <: ?T and str <: ?T or ?T <: number and ?T <: serializable;

@@ -1,0 +1,5 @@
+class number;
+class int extends number;
+metavar ?T;
+assert age: int <: number;
+assert ?T <: number;

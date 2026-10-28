@@ -1,0 +1,4 @@
+unsatisfiable
+core:
+  require_lower
+  require_upper

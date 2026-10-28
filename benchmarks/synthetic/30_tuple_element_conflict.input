@@ -1,0 +1,31 @@
+# verdict: unsatisfiable
+# Seven element assignments satisfy Bound. The final unrelated Bad assignment
+# makes the stored tuple violate its upper bound.
+class Bound;
+class Good0 extends Bound;
+class Good1 extends Bound;
+class Good2 extends Bound;
+class Good3 extends Bound;
+class Good4 extends Bound;
+class Good5 extends Bound;
+class Good6 extends Bound;
+class Bad;
+metavar ?E0;
+metavar ?E1;
+metavar ?E2;
+metavar ?E3;
+metavar ?E4;
+metavar ?E5;
+metavar ?E6;
+metavar ?E7;
+metavar ?T;
+assert tuple[?E0, ?E1, ?E2, ?E3, ?E4, ?E5, ?E6, ?E7] <: ?T;
+assert ?T <: tuple[Bound, Bound, Bound, Bound, Bound, Bound, Bound, Bound];
+assert Good0 <: ?E0;
+assert Good1 <: ?E1;
+assert Good2 <: ?E2;
+assert Good3 <: ?E3;
+assert Good4 <: ?E4;
+assert Good5 <: ?E5;
+assert Good6 <: ?E6;
+assert Bad <: ?E7;

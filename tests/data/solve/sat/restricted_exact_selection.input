@@ -1,0 +1,5 @@
+class A;
+
+assert forall X. (X) -> X
+    <: (tuple[forall Y in {A}. (Y) -> Y])
+       -> tuple[forall Z in {A}. (Z) -> Z];

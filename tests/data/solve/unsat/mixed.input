@@ -1,0 +1,6 @@
+class animal;
+class dog extends animal;
+class cat extends animal;
+metavar ?T;
+assert dog <: ?T;
+assert needs_cat: ?T <: cat;

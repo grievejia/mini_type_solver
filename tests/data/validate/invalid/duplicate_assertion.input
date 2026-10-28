@@ -1,0 +1,3 @@
+assert foo: a <: b;
+assert bar: a <: b;
+assert foo: a <: b;

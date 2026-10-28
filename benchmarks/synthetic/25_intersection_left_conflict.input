@@ -1,0 +1,9 @@
+# verdict: satisfiable
+# Intersection-left conflict: assigning a to ?T makes ?T & a <: b false.
+# Assigning a to ?U satisfies both constraints.
+class a;
+class b;
+metavar ?T;
+metavar ?U;
+assert choose: a <: ?T | ?U;
+assert guard: ?T & a <: b;

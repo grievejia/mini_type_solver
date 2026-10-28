@@ -1,0 +1,31 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/higher_order.rs:759
+#   test_overload_pruning_ignored_when_solved_before_materialization
+# Pyrefly: `project(f, 1, 1)` is an error ("Overload type was not compatible
+# with solved type variables: S = int, T = int"). These constraints are
+# satisfiable with T = int and S = int | str. The Pyrefly error comes from
+# solve order: Pyrefly fixes S from `z` before it uses the overloaded `f`.
+#
+#   project[T, S](f: Callable[[T], tuple[T, S]], y: T, z: S)
+#       -> Callable[[], tuple[T, S]]
+#   f: overload of (int) -> tuple[int, str] and (str) -> tuple[str, int]
+#
+# The call gives T and S fresh metavariables. Each argument check is one
+# assertion. `f` is an overloaded value checked against
+# (?T) -> tuple[?T, ?S], so it is an `or` over its signatures. `y` makes T
+# hold int, which rules out the str signature. The int signature then puts
+# str into S through the tuple, and `z` puts int into S. S must hold both,
+# so it is int | str.
+#
+# Overload order: `y` gives T a lower bound of int, so the str signature
+# cannot fit. At most one signature fits. First match gives the same result
+# as any match.
+class int;
+class str;
+metavar ?T;
+metavar ?S;
+
+assert f_arg: ((int) -> tuple[int, str] <: (?T) -> tuple[?T, ?S])
+    or ((str) -> tuple[str, int] <: (?T) -> tuple[?T, ?S]);
+assert y_arg: int <: ?T;
+assert z_arg: int <: ?S;

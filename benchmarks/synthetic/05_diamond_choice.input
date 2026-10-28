@@ -1,0 +1,12 @@
+# verdict: satisfiable
+# Diamond hierarchy with a disjunctive upper bound. The model assigns
+# ?T = bottom, whichever branch is active. An engine can activate either
+# branch or both branches. This measures multiple inheritance under
+# different valid Boolean activations.
+class top;
+class left extends top;
+class right extends top;
+class bottom extends left, right;
+metavar ?T;
+assert low: bottom <: ?T;
+assert choice: (?T <: left) or (?T <: right);

@@ -1,0 +1,15 @@
+# verdict: satisfiable
+# The first seven upper choices have a wrong length or one unrelated element.
+# The final choice matches every tuple element.
+class A;
+class B;
+metavar ?T;
+assert tuple[A, A, A, A] <: ?T;
+assert (?T <: tuple[])
+    or (?T <: tuple[B])
+    or (?T <: tuple[B, B, B, B])
+    or (?T <: tuple[A, B, A, A])
+    or (?T <: tuple[A, A, B, A])
+    or (?T <: tuple[A, A, A, B])
+    or (?T <: tuple[A, A, A, A, A])
+    or (?T <: tuple[A, A, A, A]);

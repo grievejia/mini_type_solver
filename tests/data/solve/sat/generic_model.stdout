@@ -1,0 +1,6 @@
+satisfiable
+model:
+  ?Generic = forall T2. (T2) -> T2
+  ?Nested = forall T2. (T2) -> forall T3. () -> T2 | T3
+  ?Mixed = ((object) -> object) | (forall T2. (T2) -> object)
+  ?Inactive = unconstrained

@@ -1,0 +1,5 @@
+class A;
+metavar ?T;
+metavar ?U;
+assert (?T) -> A <: ?U;
+assert ?U <: ?T;

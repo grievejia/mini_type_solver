@@ -1,0 +1,17 @@
+# verdict: satisfiable
+# Needle in a haystack: an 8-way disjunction where only the last
+# branch is compatible with the fixed lower bound. The model assigns
+# ?T = base. Engines that try branches left to right fail seven
+# times before the hit.
+class ok;
+class base extends ok;
+class f1;
+class f2;
+class f3;
+class f4;
+class f5;
+class f6;
+class f7;
+metavar ?T;
+assert low: base <: ?T;
+assert needle: (?T <: f1) or (?T <: f2) or (?T <: f3) or (?T <: f4) or (?T <: f5) or (?T <: f6) or (?T <: f7) or (?T <: ok);

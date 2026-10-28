@@ -1,0 +1,75 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 40,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 8,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 7,
+                    },
+                    name: "a",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 10,
+                    end: 21,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 18,
+                        end: 20,
+                    },
+                    name: "T",
+                },
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 23,
+                    end: 38,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 30,
+                            end: 37,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 30,
+                                    end: 31,
+                                },
+                                name: "a",
+                            },
+                        ),
+                        right: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 35,
+                                    end: 37,
+                                },
+                                name: "T",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

@@ -1,0 +1,37 @@
+# verdict: satisfiable
+# Source: ty mdtest bidirectional.md:1133
+#   Bidirectional type inference / Generic call argument inference
+#   (third code block; the call is at line 1249)
+# ty: `two_lists(lst(X()), lst(X()))` has type X. The inner calls reveal
+# list[X | int] and list[X | str].
+#
+#   def lst[T](x: T) -> list[T]
+#   def two_lists[T](x: list[T | int], y: list[T | str]) -> T
+#
+# Each call gives its type parameter a fresh metavariable: ?A and ?B for the
+# two `lst` calls, and ?T for `two_lists`. Each inner result is an argument
+# of the outer call. list is invariant, so ?A must equal ?T | int, and ?B
+# must equal ?T | str. Each inner argument puts X into its metavariable, so
+# X must fit ?T | int and ?T | str. X fits neither int nor str, so X must go
+# into ?T. The revealed result type X is an upper bound on ?T. The solver
+# must split an equality between a metavariable and a union that contains
+# another metavariable.
+#
+# The same unit has this call with list displays ([X()]), which need
+# contextual display typing (out of scope). Its dict versions (`dct`,
+# `two_dicts`) have the same structure with an `Any` value type, and its
+# `*_default` versions differ only by a TypeVar default. They are not
+# repeated.
+class int;
+class str;
+class X;
+class list[T];
+metavar ?A;
+metavar ?B;
+metavar ?T;
+
+assert lst_a: X <: ?A;
+assert lst_b: X <: ?B;
+assert two_lists_x: list[?A] <: list[?T | int];
+assert two_lists_y: list[?B] <: list[?T | str];
+assert result: ?T <: X;

@@ -1,0 +1,13 @@
+class A;
+class B;
+metavar ?T;
+assert () -> A <: object;
+assert (A) -> B <: object;
+assert (A, B) -> A <: object;
+assert (A) -> (B) -> A <: object;
+assert (A) -> B | A <: object;
+assert ((A) -> B) | A <: object;
+assert ((A) -> B) & A <: object;
+assert tuple[(A) -> B] <: tuple[object];
+assert (tuple[A]) -> tuple[B] <: object;
+assert ((A) -> B, tuple[A]) -> B <: object;

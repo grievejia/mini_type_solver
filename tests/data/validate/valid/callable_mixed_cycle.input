@@ -1,0 +1,4 @@
+metavar ?T;
+metavar ?U;
+assert tuple[?T] <: ?U;
+assert ?U <: () -> ?T;

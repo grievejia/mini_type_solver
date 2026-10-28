@@ -1,0 +1,5 @@
+# verdict: satisfiable
+# Baseline: one true lower bound. The model assigns ?T = a.
+class a;
+metavar ?T;
+assert lower: a <: ?T;

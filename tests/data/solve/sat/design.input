@@ -1,0 +1,31 @@
+# Primitive type environment (`object` and `never` are built in)
+class number extends object;
+class int extends number;
+class float extends number;
+class str extends object;
+class serializable extends object;
+
+# Multiple inheritance, when needed, is declared in one place:
+class special_number extends number, serializable;
+
+# Metavariables are declared explicitly and use ? at reference sites.
+metavar ?T;
+metavar ?U;
+metavar ?V;
+
+assert lower_bound:
+    int <: ?T;
+
+assert possible_upper:
+    (?T <: str) or (?T <: number);
+
+# Assertion names are optional.
+assert ?T <: object;
+
+# Separate primitive bounds may synthesize a union result.
+assert int <: ?U;
+assert str <: ?U;
+
+# Separate upper constraints apply to the same assignment.
+assert ?V <: number;
+assert ?V <: serializable;

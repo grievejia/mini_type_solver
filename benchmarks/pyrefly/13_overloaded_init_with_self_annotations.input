@@ -1,0 +1,38 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/constructors.rs:1142
+#   test_overloaded_constructor_with_hint
+# Pyrefly: `process(Box({1: 1}))` has type Box[int].
+#
+#   class Box(Generic[_T_co]):
+#       @overload
+#       def __init__(self: Box[Never], val: Mapping[Never, SupportsInt], /)
+#       @overload
+#       def __init__(self: Box[_T], val: Mapping[_T, SupportsInt], /)
+#   def process(items: Box[_T]) -> Box[_T]
+#
+# The constructor call is an `or` over the two signatures. A `self`
+# annotation gives the type of the new object, so each branch gives its own
+# lower bound on the result metavariable ?box. The second signature has its
+# own type variable, so it gets a fresh metavariable ?M. Mapping is invariant
+# in its key, so the first branch needs the key int to equal Never, and the
+# second branch makes ?M equal int.
+# `process` gives its T a fresh metavariable ?P, and `assert_type` is an
+# upper bound on its result.
+#
+# Overload order: the first signature rejects a key of int, so at most one
+# signature fits. First match gives the same result as any match.
+# Approximations: the protocol SupportsInt is a class that int extends. The
+# dict display has its own type, dict[int, int].
+class SupportsInt;
+class int extends SupportsInt;
+class Mapping[K, +V];
+class dict[K, V] extends Mapping[K, V];
+class Box[+T];
+metavar ?M;
+metavar ?box;
+metavar ?P;
+
+assert box_ctor: (dict[int, int] <: Mapping[never, SupportsInt] and Box[never] <: ?box)
+    or (dict[int, int] <: Mapping[?M, SupportsInt] and Box[?M] <: ?box);
+assert process_arg: ?box <: Box[?P];
+assert process_result: Box[?P] <: Box[int];

@@ -1,0 +1,5 @@
+satisfiable
+model:
+  ?M = mu R0. tuple[R0]
+  ?X = (mu R0. tuple[R0]) -> B
+  ?R = mu R0. tuple[R0]

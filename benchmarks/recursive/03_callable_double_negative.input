@@ -1,0 +1,6 @@
+# verdict: satisfiable
+class A;
+metavar ?T;
+metavar ?W;
+assert (?W) -> A <: ?T;
+assert ?T <: ((?T) -> A) -> A;

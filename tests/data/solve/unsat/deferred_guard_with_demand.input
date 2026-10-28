@@ -1,0 +1,6 @@
+class A; class C; class D;
+metavar ?Z; metavar ?W;
+assert first: forall X. (X) -> tuple[X & C, X]
+    <: (forall Y. (Y) -> Y) -> tuple[?Z, ?W];
+assert guard: ?Z <: D;
+assert demand: ?W <: (A) -> A;

@@ -1,0 +1,25 @@
+# verdict: satisfiable
+# Three three-member exact sets create 3^3 = 27 upper callable factors. The
+# seed satisfies all of them. Each left Boolean choice adds a failing lower
+# callable to ?F; each right choice is neutral. Only the all-neutral
+# combination works. DNF materializes 32 terms, while direct search can prune
+# each failing choice before it combines siblings.
+class A;
+class B;
+class C;
+class N0;
+class N1;
+class N2;
+class N3;
+class N4;
+metavar ?F;
+assert upper: ?F <: forall X in {A, B, C},
+                            Y in {A, B, C},
+                            Z in {A, B, C}.
+                       (X, Y, Z) -> tuple[X, Y, Z];
+assert seed: (object, object, object) -> never <: ?F;
+assert c0: ((A, A, A) -> never <: ?F) or (N0 <: N0);
+assert c1: ((B, B, B) -> never <: ?F) or (N1 <: N1);
+assert c2: ((C, C, C) -> never <: ?F) or (N2 <: N2);
+assert c3: ((A, B, C) -> never <: ?F) or (N3 <: N3);
+assert c4: ((C, B, A) -> never <: ?F) or (N4 <: N4);

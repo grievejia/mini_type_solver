@@ -1,0 +1,42 @@
+# verdict: unsatisfiable
+# Same 10 binary choices as 09_dnf_theory_sat_10, plus an upper bound
+# that conflicts with the anchor without using any choice. The core is
+# [anchor, poison_final]. DNF still materializes
+# 1024 terms for the initial formula. Direct search can detect the
+# unconditional conflict without entering a branch. Reported counters
+# also include the work required to minimize the core.
+class a;
+class b0;
+class b1;
+class b2;
+class b3;
+class b4;
+class b5;
+class b6;
+class b7;
+class b8;
+class b9;
+class t0;
+class t1;
+class t2;
+class t3;
+class t4;
+class t5;
+class t6;
+class t7;
+class t8;
+class t9;
+class z;
+metavar ?T;
+assert anchor: a <: ?T;
+assert c0: (?T <: b0) or (t0 <: t0);
+assert c1: (?T <: b1) or (t1 <: t1);
+assert c2: (?T <: b2) or (t2 <: t2);
+assert c3: (?T <: b3) or (t3 <: t3);
+assert c4: (?T <: b4) or (t4 <: t4);
+assert c5: (?T <: b5) or (t5 <: t5);
+assert c6: (?T <: b6) or (t6 <: t6);
+assert c7: (?T <: b7) or (t7 <: t7);
+assert c8: (?T <: b8) or (t8 <: t8);
+assert c9: (?T <: b9) or (t9 <: t9);
+assert poison_final: ?T <: z;

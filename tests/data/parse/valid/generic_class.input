@@ -1,0 +1,6 @@
+class A[T, + # covariance
+    U, -V];
+class B[X] extends A[tuple[X], (X) -> object, never], Plain;
+class Plain;
+metavar ?M;
+assert A[B[?M | tuple[Plain]], forall Y. (Y) -> Y, (Plain & tuple[object]) | ((never) -> object)] <: object;

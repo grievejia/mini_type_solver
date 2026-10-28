@@ -1,0 +1,5 @@
+metavar ?Inner;
+metavar ?Active;
+metavar ?Unselected;
+assert active_tuple: tuple[?Inner] <: ?Active;
+assert choose_plain: (object <: object) or (tuple[] <: ?Unselected);

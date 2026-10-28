@@ -1,0 +1,4 @@
+class N[-T];
+class C[X] extends N[N[C[X]]];
+class A;
+assert C[A] <: N[C[A]];

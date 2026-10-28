@@ -1,0 +1,4 @@
+# verdict: satisfiable
+metavar ?T;
+assert (forall X. (X) -> ?T) <: ?T;
+assert ?T <: (forall Y. (Y) -> ?T);

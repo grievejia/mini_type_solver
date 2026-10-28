@@ -1,0 +1,117 @@
+# verdict: unsatisfiable
+# Source: ty mdtest generics/pep695/functions.md:1636
+#   Generic functions: PEP 695 syntax / Typevar inference is a unification
+#   problem (the blocks with unions of generic classes)
+# ty: the calls below give the asserted types, except where a comment says
+# error. Two calls differ from this solver:
+#   - `extract_t(PandQ())` is an error in ty (a TODO says it should ideally
+#     give Unknown). Here it holds: PandQ is a P[int], so the P arm works.
+#   - `f(Sub[str | None]())` gives str | None in ty. A TODO says it should
+#     give str. Here the asserted str holds.
+#
+#   class P[T]: x: T            class Q[T]: x: T          (invariant)
+#   def extract_t[T](x: P[T] | Q[T]) -> T
+#   def extract_both[T, S](x: P[T] | Q[S]) -> tuple[T, S]
+#   def extract_optional_t[T](x: None | P[T]) -> T
+#   class Base[T]: x: T         class Sub[T](Base[T])
+#   def f[T](t: Base[T] | Sub[T | None]) -> T
+#   class PV[T]: value: T
+#   def g[I: int, S: str](t: PV[I] | PV[S]) -> tuple[I, S]   (named f in the test)
+#
+# Each call gives each type variable a fresh metavariable. The argument must
+# fit one arm of a union of invariant generic classes, and the arm decides
+# the solution. An argument can reach an arm through a superclass. In
+# `f(Sub[str | None]())`, the Sub arm needs ?k | None to equal str | None, so
+# ?k can be str or str | None, and only str meets the asserted type. The Base
+# arm would give str | None. In `g`, the bounds decide the arm. A bound is one
+# assertion, and the asserted type is an upper bound on the result.
+#
+# The other blocks of this unit (`two_params`, `union_param`,
+# `union_and_nonunion_params`, `accepts_t_or_int`, `accepts_t_or_list_of_t`,
+# `accepts_instance_or_int`, `tuple_param`) are trivial or repeat Pyrefly
+# candidates 03 and 05. `extract_both` on SubP and SubQ repeats the shape of
+# `extract_t` on them.
+# Variance: every class has a mutable attribute of type T, so ty infers it as
+# invariant.
+# Approximation: the list display [1, 2] is list[int].
+class int;
+class str;
+class bytes;
+class NoneType;
+class list[T];
+class P[T];
+class Q[T];
+class SubP[T] extends P[T];
+class SubQ[T] extends Q[T];
+class PandQ extends P[int], Q[str];
+class Base[T];
+class Sub[T] extends Base[T];
+class PV[T];
+metavar ?a;
+metavar ?b;
+metavar ?c;
+metavar ?d_T;
+metavar ?d_S;
+metavar ?e;
+metavar ?e2;
+metavar ?pq;
+metavar ?pqb_T;
+metavar ?pqb_S;
+metavar ?h;
+metavar ?i;
+metavar ?j;
+metavar ?k;
+metavar ?gi_I;
+metavar ?gi_S;
+metavar ?gs_I;
+metavar ?gs_S;
+metavar ?gb_I;
+metavar ?gb_S;
+
+# extract_t(P[int]())  -- int
+assert p_arg: P[int] <: P[?a] | Q[?a];
+assert p_result: ?a <: int;
+# extract_t(Q[str]())  -- str
+assert q_arg: Q[str] <: P[?b] | Q[?b];
+assert q_result: ?b <: str;
+# extract_t([1, 2])  -- error
+assert list_arg: list[int] <: P[?c] | Q[?c];
+# extract_both(P[int]())  -- tuple[int, Unknown]
+assert both_arg: P[int] <: P[?d_T] | Q[?d_S];
+assert both_result: ?d_T <: int;
+# extract_t(SubP[int]())  -- int;  extract_t(SubQ[str]())  -- str
+assert subp_arg: SubP[int] <: P[?e] | Q[?e];
+assert subp_result: ?e <: int;
+assert subq_arg: SubQ[str] <: P[?e2] | Q[?e2];
+assert subq_result: ?e2 <: str;
+# extract_t(PandQ())  -- error in ty; holds here
+assert pandq_arg: PandQ <: P[?pq] | Q[?pq];
+# extract_both(PandQ())  -- tuple[int, str]
+assert pandqb_arg: PandQ <: P[?pqb_T] | Q[?pqb_S];
+assert pandqb_result_T: ?pqb_T <: int;
+assert pandqb_result_S: ?pqb_S <: str;
+# extract_optional_t(P[int]())  -- int
+assert optp_arg: P[int] <: NoneType | P[?h];
+assert optp_result: ?h <: int;
+# extract_optional_t(Q[str]())  -- error
+assert optq_arg: Q[str] <: NoneType | P[?i];
+# f(Base[int]())  -- int
+assert base_arg: Base[int] <: Base[?j] | Sub[?j | NoneType];
+assert base_result: ?j <: int;
+# f(Sub[str | None]())  -- TODO: str
+assert sub_arg: Sub[str | NoneType] <: Base[?k] | Sub[?k | NoneType];
+assert sub_result: ?k <: str;
+# g(PV[int]())  -- tuple[int, Unknown]
+assert gi_arg: PV[int] <: PV[?gi_I] | PV[?gi_S];
+assert gi_bound_I: ?gi_I <: int;
+assert gi_bound_S: ?gi_S <: str;
+assert gi_result: ?gi_I <: int;
+# g(PV[str]())  -- tuple[Unknown, str]
+assert gs_arg: PV[str] <: PV[?gs_I] | PV[?gs_S];
+assert gs_bound_I: ?gs_I <: int;
+assert gs_bound_S: ?gs_S <: str;
+assert gs_result: ?gs_S <: str;
+# g(PV[bytes]())  -- error
+assert gb_arg: PV[bytes] <: PV[?gb_I] | PV[?gb_S];
+assert gb_bound_I: ?gb_I <: int;
+assert gb_bound_S: ?gb_S <: str;

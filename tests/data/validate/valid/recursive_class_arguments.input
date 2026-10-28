@@ -1,0 +1,6 @@
+class Comparable[T];
+class Int extends Comparable[Int];
+class Seq[+T];
+class S extends Seq[S];
+class N[-T];
+class C extends N[N[C]];

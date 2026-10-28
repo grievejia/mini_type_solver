@@ -1,0 +1,54 @@
+# verdict: satisfiable
+# Source: ty mdtest overloads.md:453
+#   Overloads / Disjunctive generic receivers
+# ty: both the call and the callable assignment are accepted.
+#
+#   class Left[T]:  left: T
+#   class Right[T]: right: T
+#   class BaseWithDisjunctiveReceiver:
+#       @overload
+#       def method[S, U](self: Left[S] | Right[U], first: S, second: U) -> tuple[S, U]
+#       @overload
+#       def method(self, first: bytes, second: bytes) -> tuple[bytes, bytes]
+#   class Both(BaseWithDisjunctiveReceiver, Left[int], Right[str])
+#   receiver.method(1, b"value")
+#   valid_callback: Callable[[int, bytes], tuple[int, bytes]] = receiver.method
+#
+# Each use of the overloaded method is an `or` over its signatures. The generic
+# signature gives S and U fresh metavariables for each use. Binding the
+# receiver checks `Both` against the union self annotation. Both arms fit the
+# receiver alone: the Left arm makes S equal int, and the Right arm makes U
+# equal str. The other arguments decide the arm. The second argument is bytes,
+# so U must hold bytes, which rules out the Right arm. The callable target
+# then makes S equal int and U equal bytes through the Left arm.
+#
+# Overload order: the second signature needs int to fit bytes, so it fits
+# neither use. At most one signature fits. First match gives the same result
+# as any match.
+# Variance: Left and Right have a mutable attribute of type T, so ty infers
+# them invariant.
+# Approximation: the literal 1 is widened to int.
+class int;
+class str;
+class bytes;
+class Left[T];
+class Right[T];
+class BaseWithDisjunctiveReceiver;
+class Both extends BaseWithDisjunctiveReceiver, Left[int], Right[str];
+metavar ?call_S;
+metavar ?call_U;
+metavar ?callback_S;
+metavar ?callback_U;
+
+# receiver.method(1, b"value")
+assert call: (Both <: Left[?call_S] | Right[?call_U]
+        and int <: ?call_S
+        and bytes <: ?call_U)
+    or (Both <: BaseWithDisjunctiveReceiver and int <: bytes and bytes <: bytes);
+
+# valid_callback: Callable[[int, bytes], tuple[int, bytes]] = receiver.method
+assert callback: (Both <: Left[?callback_S] | Right[?callback_U]
+        and (?callback_S, ?callback_U) -> tuple[?callback_S, ?callback_U]
+            <: (int, bytes) -> tuple[int, bytes])
+    or (Both <: BaseWithDisjunctiveReceiver
+        and (bytes, bytes) -> tuple[bytes, bytes] <: (int, bytes) -> tuple[int, bytes]);

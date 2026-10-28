@@ -1,0 +1,263 @@
+grammar;
+
+use lalrpop_util::ParseError;
+
+use super::ast::{
+    build_callable, build_nary, build_type_operators, metavar_ident, AssertDecl,
+    CallableTypeExpr, ClassApplication, ClassArguments, ClassDecl,
+    ClassParameterExpr, ClassParameters, Declaration,
+    Formula, GenericCallableTypeExpr, GenericParameterExpr, Ident,
+    MetavarDecl, Paren, ParenTypeExpr, SuperclassExpr, Subtype,
+    TupleTypeExpr, TypeExpr, VarianceExpr,
+};
+use super::diagnostic::{Diagnostic, Span};
+
+match {
+    r"[ \t\n]+" => { },
+    r"\r\n" => { },
+    r"#[^\r\n]*" => { },
+    r"\?[A-Za-z_][A-Za-z0-9_]*" => META_NAME,
+    r"[A-Za-z_][A-Za-z0-9_]*" => NAME,
+    _,
+}
+
+extern {
+    type Error = Diagnostic;
+}
+
+pub Declarations: Vec<Declaration> = <Declaration*>;
+
+Declaration: Declaration = {
+    <declaration:ClassDeclaration> => Declaration::Class(declaration),
+    <declaration:MetavarDeclaration> => Declaration::Metavar(declaration),
+    <declaration:Assertion> => Declaration::Assert(declaration),
+};
+
+ClassDeclaration: ClassDecl =
+    <start:@L> "class" <name:Name> <parameters:ClassParameterList?>
+    <superclasses:("extends" <Comma1<Superclass>>)?> ";" <end:@R> =>
+        ClassDecl {
+            span: Span::new(start, end),
+            name,
+            parameters,
+            superclasses: superclasses.unwrap_or_default(),
+        };
+
+ClassParameterList: ClassParameters =
+    <open_start:@L> "[" <open_end:@R>
+    <first:ClassParameter> <rest:("," <ClassParameter>)*>
+    <close_start:@L> "]" <close_end:@R> => ClassParameters {
+        open_bracket: Span::new(open_start, open_end),
+        first,
+        rest,
+        close_bracket: Span::new(close_start, close_end),
+    };
+
+ClassParameter: ClassParameterExpr =
+    <start:@L> <variance:VarianceSign?> <name:Name> <end:@R> => ClassParameterExpr {
+        span: Span::new(start, end),
+        name,
+        variance: variance.unwrap_or(VarianceExpr::Invariant),
+    };
+
+VarianceSign: VarianceExpr = {
+    <start:@L> "+" <end:@R> => VarianceExpr::Covariant(Span::new(start, end)),
+    <start:@L> "-" <end:@R> => VarianceExpr::Contravariant(Span::new(start, end)),
+};
+
+Superclass: SuperclassExpr =
+    <start:@L> <name:Name> <arguments:ClassArgumentList?> <end:@R> => SuperclassExpr {
+        span: Span::new(start, end),
+        name,
+        arguments,
+    };
+
+ClassArgumentList: ClassArguments =
+    <open_start:@L> "[" <open_end:@R>
+    <first:TypeExpr> <rest:("," <TypeExpr>)*>
+    <close_start:@L> "]" <close_end:@R> => ClassArguments {
+        open_bracket: Span::new(open_start, open_end),
+        first: Box::new(first),
+        rest,
+        close_bracket: Span::new(close_start, close_end),
+    };
+
+MetavarDeclaration: MetavarDecl =
+    <start:@L> "metavar" <name:MetaName> ";" <end:@R> => MetavarDecl {
+        span: Span::new(start, end),
+        name,
+    };
+
+Assertion: AssertDecl =
+    <start:@L> "assert" <label:(<Name> ":")?> <formula:FormulaExpr> ";" <end:@R> =>
+        AssertDecl {
+            span: Span::new(start, end),
+            label,
+            formula,
+        };
+
+FormulaExpr: Formula =
+    <first:ConjunctionExpr> <rest:OrTail*> => build_nary(
+        first,
+        rest,
+        Formula::span,
+        Formula::Or,
+    );
+
+OrTail: (Span, Formula) = <operator:OrOperator> <operand:ConjunctionExpr> =>
+    (operator, operand);
+
+ConjunctionExpr: Formula =
+    <first:FormulaPrimary> <rest:AndTail*> => build_nary(
+        first,
+        rest,
+        Formula::span,
+        Formula::And,
+    );
+
+AndTail: (Span, Formula) = <operator:AndOperator> <operand:FormulaPrimary> =>
+    (operator, operand);
+
+FormulaPrimary: Formula = {
+    <atom:SubtypeExpr> => Formula::Subtype(atom),
+    <start:@L> "(" <inner:FormulaExpr> ")" <end:@R> => Formula::Paren(Paren {
+        span: Span::new(start, end),
+        inner: Box::new(inner),
+    }),
+};
+
+SubtypeExpr: Subtype =
+    <left:TypeExpr> "<:" <right:TypeExpr> => Subtype {
+        span: Span::new(left.span().start(), right.span().end()),
+        left,
+        right,
+    };
+
+// A leading `(` needs a separate path. The token after its matching `)` decides
+// whether the prefix is a grouped type or a callable parameter list. This
+// factoring keeps that decision within one token of lookahead.
+TypeExpr: TypeExpr = {
+    <generic:GenericCallableType> => generic,
+    <type_expr:ParenStartedTypeExpr> => type_expr,
+    <first:NonParenPrimary> <intersection_rest:IntersectionTail*> <union_rest:UnionTail*> =>
+        build_type_operators(first, intersection_rest, union_rest),
+};
+
+UnionTail: (Span, TypeExpr) = <operator:UnionOperator> <operand:IntersectionExpr> =>
+    (operator, operand);
+
+IntersectionExpr: TypeExpr =
+    <first:TypePrimary> <rest:IntersectionTail*> =>
+        build_type_operators(first, rest, Vec::new());
+
+IntersectionTail: (Span, TypeExpr) = <operator:IntersectionOperator> <operand:TypePrimary> =>
+    (operator, operand);
+
+TypePrimary: TypeExpr = {
+    <primary:NonParenPrimary> => primary,
+    <start:@L> "(" <inner:TypeExpr> ")" <end:@R> => TypeExpr::Paren(ParenTypeExpr {
+        span: Span::new(start, end),
+        inner: Box::new(inner),
+    }),
+};
+
+NonParenPrimary: TypeExpr = {
+    <name:Name> => TypeExpr::Name(name),
+    <start:@L> <name:Name> <arguments:ClassArgumentList> <end:@R> =>
+        TypeExpr::ClassApplication(ClassApplication {
+            span: Span::new(start, end),
+            name,
+            arguments,
+        }),
+    <name:MetaName> => TypeExpr::MetaName(name),
+    <tuple:TupleType> => tuple,
+};
+
+ParenStartedTypeExpr: TypeExpr = {
+    <callable:CallableType> => TypeExpr::Callable(callable),
+    <start:@L> "(" <inner:TypeExpr> ")" <end:@R> <intersection_rest:IntersectionTail*> <union_rest:UnionTail*> => {
+        let grouped = TypeExpr::Paren(ParenTypeExpr {
+            span: Span::new(start, end),
+            inner: Box::new(inner),
+        });
+        build_type_operators(grouped, intersection_rest, union_rest)
+    },
+};
+
+CallableType: CallableTypeExpr = {
+    <start:@L> "(" ")" <callable:CallableReturn> <end:@R> =>
+        build_callable(start, Vec::new(), callable, end),
+    <start:@L> "(" <param:TypeExpr> ")" <callable:CallableReturn> <end:@R> =>
+        build_callable(start, vec![param], callable, end),
+    <start:@L> "(" <first:TypeExpr> "," <rest:Comma1<TypeExpr>> ")" <callable:CallableReturn> <end:@R> => {
+        let mut params = Vec::with_capacity(1 + rest.len());
+        params.push(first);
+        params.extend(rest);
+        build_callable(start, params, callable, end)
+    },
+};
+
+GenericCallableType: TypeExpr =
+    <keyword_start:@L> "forall" <keyword_end:@R>
+    <parameters:Comma1<GenericParameter>> <dot_start:@L> "." <dot_end:@R>
+    <body:CallableType> <end:@R> => TypeExpr::Generic(Box::new(GenericCallableTypeExpr {
+        span: Span::new(keyword_start, end),
+        keyword: Span::new(keyword_start, keyword_end),
+        parameters,
+        dot: Span::new(dot_start, dot_end),
+        body,
+    }));
+
+GenericParameter: GenericParameterExpr = {
+    <name:Name> => GenericParameterExpr::Plain { name },
+    <name:Name> <operator:SubtypeOperator> <upper:TypeExpr> =>
+        GenericParameterExpr::UpperBound {
+            name,
+            operator,
+            upper,
+        },
+    <name:Name>
+    <keyword_start:@L> "in" <keyword_end:@R>
+    <open_start:@L> "{" <open_end:@R>
+    <first:TypeExpr> <rest:("," <TypeExpr>)*>
+    <close_start:@L> "}" <close_end:@R> => GenericParameterExpr::ExactSet {
+        name,
+        keyword: Span::new(keyword_start, keyword_end),
+        open_brace: Span::new(open_start, open_end),
+        first,
+        rest,
+        close_brace: Span::new(close_start, close_end),
+    },
+};
+
+CallableReturn: (Span, TypeExpr) = <arrow:ArrowOperator> <ret:TypeExpr> => (arrow, ret);
+
+TupleType: TypeExpr =
+    <start:@L> "tuple" "[" <elements:Comma1<TypeExpr>?> "]" <end:@R> =>
+        TypeExpr::Tuple(TupleTypeExpr {
+            span: Span::new(start, end),
+            elements: elements.unwrap_or_default(),
+        });
+
+Name: Ident = <start:@L> <name:NAME> <end:@R> => Ident {
+    span: Span::new(start, end),
+    name: name.to_owned(),
+};
+
+MetaName: Ident = <start:@L> <raw:META_NAME> <end:@R> =>?
+    metavar_ident(raw, Span::new(start, end))
+        .map_err(|error| ParseError::User { error });
+
+OrOperator: Span = <start:@L> "or" <end:@R> => Span::new(start, end);
+AndOperator: Span = <start:@L> "and" <end:@R> => Span::new(start, end);
+UnionOperator: Span = <start:@L> "|" <end:@R> => Span::new(start, end);
+IntersectionOperator: Span = <start:@L> "&" <end:@R> => Span::new(start, end);
+ArrowOperator: Span = <start:@L> "->" <end:@R> => Span::new(start, end);
+SubtypeOperator: Span = <start:@L> "<:" <end:@R> => Span::new(start, end);
+
+Comma1<T>: Vec<T> = <first:T> <rest:("," <T>)*> => {
+    let mut values = Vec::with_capacity(1 + rest.len());
+    values.push(first);
+    values.extend(rest);
+    values
+};

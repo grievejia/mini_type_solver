@@ -1,0 +1,2 @@
+class A;
+assert forall X. (forall X. (X) -> X) -> A <: object;

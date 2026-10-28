@@ -1,0 +1,77 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 33,
+    },
+    decls: [
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 0,
+                    end: 14,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 7,
+                            end: 13,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 7,
+                                    end: 8,
+                                },
+                                name: "a",
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 12,
+                                    end: 13,
+                                },
+                                name: "b",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 15,
+                    end: 23,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 21,
+                        end: 22,
+                    },
+                    name: "a",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 24,
+                    end: 32,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 30,
+                        end: 31,
+                    },
+                    name: "b",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+    ],
+}

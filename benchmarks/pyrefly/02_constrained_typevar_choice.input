@@ -1,0 +1,47 @@
+# verdict: unsatisfiable
+# Source: pyrefly/lib/test/generic_restrictions.rs:1749
+#   test_constraint_subtyping (marked `bug`)
+# Pyrefly: `f(Child(), Parent())` is a false error. Pyrefly fixes T to the
+# constraint of the first argument (Child) and then rejects Parent.
+# `f(Child(), Unrelated())` is a real error.
+#
+#   f[T: (Child, Parent, Unrelated)](x: T, y: T) -> T
+#
+# Each call gives T a fresh metavariable. A constrained type variable must
+# equal exactly one of its constraints, so that choice is an `or` of
+# equalities (`*_choice`). Each argument check and each asserted result type
+# is one assertion. The search must find one constraint that holds both
+# arguments:
+#   f(Parent(), Child())    -> T = Parent
+#   f(Child(), Parent())    -> T = Parent  (the Pyrefly bug: this holds)
+#   f(Child(), Unrelated()) -> no constraint holds both arguments
+# The core is the last call.
+class Parent;
+class Child extends Parent;
+class Unrelated;
+metavar ?pc_T;
+metavar ?cp_T;
+metavar ?cu_T;
+
+# assert_type(f(Parent(), Child()), Parent)
+assert pc_choice: (?pc_T <: Child and Child <: ?pc_T)
+    or (?pc_T <: Parent and Parent <: ?pc_T)
+    or (?pc_T <: Unrelated and Unrelated <: ?pc_T);
+assert pc_x: Parent <: ?pc_T;
+assert pc_y: Child <: ?pc_T;
+assert pc_result: ?pc_T <: Parent;
+
+# assert_type(f(Child(), Parent()), Parent)
+assert cp_choice: (?cp_T <: Child and Child <: ?cp_T)
+    or (?cp_T <: Parent and Parent <: ?cp_T)
+    or (?cp_T <: Unrelated and Unrelated <: ?cp_T);
+assert cp_x: Child <: ?cp_T;
+assert cp_y: Parent <: ?cp_T;
+assert cp_result: ?cp_T <: Parent;
+
+# f(Child(), Unrelated())  -- error
+assert cu_choice: (?cu_T <: Child and Child <: ?cu_T)
+    or (?cu_T <: Parent and Parent <: ?cu_T)
+    or (?cu_T <: Unrelated and Unrelated <: ?cu_T);
+assert cu_x: Child <: ?cu_T;
+assert cu_y: Unrelated <: ?cu_T;

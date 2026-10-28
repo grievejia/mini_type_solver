@@ -1,0 +1,6 @@
+class Leaf extends Mid[object];
+class Mid[T] extends Plain;
+class Plain;
+assert Leaf <: Plain;
+assert Leaf <: Mid[object];
+assert Mid[forall X. (X) -> X] <: Plain;

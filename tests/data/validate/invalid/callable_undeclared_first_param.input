@@ -1,0 +1,2 @@
+class A;
+assert (Missing, A) -> A <: object;

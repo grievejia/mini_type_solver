@@ -1,0 +1,2 @@
+metavar ?T;
+assert forall X <: Missing | ?T. (X) -> X <: object;

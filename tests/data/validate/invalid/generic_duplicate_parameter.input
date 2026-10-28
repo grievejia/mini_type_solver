@@ -1,0 +1,1 @@
+assert forall X, X. (Missing) -> Missing <: object;

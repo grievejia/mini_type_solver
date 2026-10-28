@@ -1,0 +1,16 @@
+# verdict: unsatisfiable
+# Every branch fails: a 6-way disjunction where no upper bound sits
+# above the fixed lower bound. The core is [low, doomed]. It spans
+# a disjunction that never activates two atoms at once, plus the
+# assertion that poisons each branch.
+class ok;
+class base extends ok;
+class f1;
+class f2;
+class f3;
+class f4;
+class f5;
+class f6;
+metavar ?T;
+assert low: base <: ?T;
+assert doomed: (?T <: f1) or (?T <: f2) or (?T <: f3) or (?T <: f4) or (?T <: f5) or (?T <: f6);

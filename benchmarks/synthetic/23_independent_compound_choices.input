@@ -1,0 +1,39 @@
+# verdict: satisfiable
+# Independent compound choices: six groups use disjoint classes and
+# metavariables. Each choice has compatible upper bounds.
+class a0;
+class a1;
+class a2;
+class a3;
+class a4;
+class a5;
+metavar ?T0;
+metavar ?U0;
+metavar ?T1;
+metavar ?U1;
+metavar ?T2;
+metavar ?U2;
+metavar ?T3;
+metavar ?U3;
+metavar ?T4;
+metavar ?U4;
+metavar ?T5;
+metavar ?U5;
+assert choose0: a0 <: ?T0 | ?U0;
+assert t0_upper: ?T0 <: a0;
+assert u0_upper: ?U0 <: a0;
+assert choose1: a1 <: ?T1 | ?U1;
+assert t1_upper: ?T1 <: a1;
+assert u1_upper: ?U1 <: a1;
+assert choose2: a2 <: ?T2 | ?U2;
+assert t2_upper: ?T2 <: a2;
+assert u2_upper: ?U2 <: a2;
+assert choose3: a3 <: ?T3 | ?U3;
+assert t3_upper: ?T3 <: a3;
+assert u3_upper: ?U3 <: a3;
+assert choose4: a4 <: ?T4 | ?U4;
+assert t4_upper: ?T4 <: a4;
+assert u4_upper: ?U4 <: a4;
+assert choose5: a5 <: ?T5 | ?U5;
+assert t5_upper: ?T5 <: a5;
+assert u5_upper: ?U5 <: a5;

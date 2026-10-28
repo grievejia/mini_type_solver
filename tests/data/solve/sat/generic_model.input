@@ -1,0 +1,13 @@
+class A;
+class T0;
+class T1;
+metavar ?Generic;
+metavar ?Nested;
+metavar ?Mixed;
+metavar ?Inactive;
+
+assert forall X. (X) -> X <: ?Generic;
+assert forall X. (X) -> forall Y. () -> X | Y <: ?Nested;
+assert forall X. (X) -> object <: ?Mixed;
+assert (object) -> object <: ?Mixed;
+assert (object <: object) or (object <: (forall X. (X) -> X) -> ?Inactive);

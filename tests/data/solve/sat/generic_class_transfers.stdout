@@ -1,0 +1,9 @@
+satisfiable
+model:
+  ?Exact = Inv[Dog]
+  ?Negative = (Inv[object]) -> object
+  ?Universal = (never) -> object
+  ?Covariant = Co[object]
+  ?Contravariant = Con[never]
+  ?Retained = forall T0. (T0) -> T0
+  ?T = Dog

@@ -1,0 +1,7 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 0,
+    },
+    decls: [],
+}

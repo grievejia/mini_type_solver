@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?M = Box[A] | A
+  ?N = Box[A] & A

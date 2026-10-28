@@ -1,0 +1,1 @@
+assert tuple[a b] <: object;

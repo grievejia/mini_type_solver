@@ -1,0 +1,3 @@
+class a;
+class b;
+assert overlap_exists: a & b <: never;

@@ -1,0 +1,5 @@
+class a;
+class b;
+metavar ?T;
+assert tuple[] <: tuple[a];
+assert nested: tuple[a | b, tuple[?T & a]] <: tuple[object, tuple[object]];

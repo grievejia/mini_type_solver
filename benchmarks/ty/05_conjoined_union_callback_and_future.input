@@ -1,0 +1,33 @@
+# verdict: satisfiable
+# Source: ty mdtest bidirectional.md:1961
+#   Bidirectional type inference / Overload evaluation (the `f9` function)
+# ty: `sink(func, future)` is an error today. A TODO says that it should not
+# be an error "once we conjoin constraints from all call arguments". These
+# constraints have no error.
+#
+#   def sink(func: Callable[[], Union[Awaitable[T2], T2]],
+#            future: Future[T2]) -> None
+#   def f9(func: Callable[[], Union[Awaitable[T2], T2]]) -> Future[T2]:
+#       future: Future[T2] = Future()
+#       sink(func, future)
+#
+# Inside `f9`, its T2 is a fixed unknown type. A fresh class models it
+# (CallerT2). The call gives the T2 of `sink` a fresh metavariable ?T. Each
+# argument check is one assertion. The callback return is a union on both
+# sides. CallerT2 must go to the bare ?T arm. Awaitable[CallerT2] can go to
+# either arm: the Awaitable[?T] arm needs CallerT2 <: ?T, and the bare arm
+# needs Awaitable[CallerT2] <: ?T. Future is invariant, so the second
+# argument makes ?T equal CallerT2. Then only the Awaitable[?T] arm works.
+# A solver that solves ?T from the first argument alone can put
+# Awaitable[CallerT2] into ?T, and then the second argument fails.
+#
+# Variance: Future declares an invariant type parameter.
+# Approximations: Awaitable (a protocol) is a nominal covariant class. The
+# caller's T2 has no bound, so CallerT2 is not a subtype of Awaitable.
+class Awaitable[+T];
+class Future[T];
+class CallerT2;
+metavar ?T;
+
+assert func: (() -> Awaitable[CallerT2] | CallerT2) <: (() -> Awaitable[?T] | ?T);
+assert future: Future[CallerT2] <: Future[?T];

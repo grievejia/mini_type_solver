@@ -1,0 +1,45 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/higher_order.rs:725
+#   test_overload_pruning_commits_nested_generic_constraints
+# Pyrefly: `list(map(collect, rows))` has type list[list[int]].
+#
+#   collect: overload of () -> list[Any] and [T](xs: Iterable[T]) -> list[T]
+#   rows: list[list[int]]
+#   map.__new__(cls, func: Callable[[_T1], _S], iterable: Iterable[_T1]) -> map[_S]
+#   list.__init__(self, iterable: Iterable[_T]) -> None
+#
+# The `map` call gives _T1 and _S fresh metavariables, and the `list` call
+# gives its _T a fresh metavariable ?U. `collect` is an overloaded value
+# checked against (?T1) -> ?S, so it is an `or` over its signatures. The
+# generic signature keeps its `forall`. The solver selects its T, and two
+# metavariables limit T from opposite sides. ?T1 holds list[int] from `rows`,
+# so T must hold int. ?S flows into ?U, and the asserted type makes ?U equal
+# list[int] through the invariant list, so list[T] must fit list[int]. Only
+# T = int satisfies both. If the solver selects T before it sees the second
+# limit, it must change that selection later.
+#
+# Overload order: the first signature takes no argument, so it never fits a
+# one-argument callable. At most one signature fits. The one-argument
+# overload of `list` is the only one that takes the argument, so it is the
+# only one written.
+# Approximations: the protocols Iterable and Iterator are nominal classes.
+# map is a subclass of Iterator[S], because its `__iter__` and `__next__`
+# make it an iterator of S. The Any in the first `collect` signature is
+# object. That signature cannot fit, so this choice has no effect.
+class int;
+class Iterable[+T];
+class Iterator[+T] extends Iterable[T];
+class list[T] extends Iterable[T];
+class map[S] extends Iterator[S];
+metavar ?T1;
+metavar ?S;
+metavar ?U;
+
+# map(collect, rows)
+assert map_func: (() -> list[object] <: (?T1) -> ?S)
+    or (forall T. (Iterable[T]) -> list[T] <: (?T1) -> ?S);
+assert map_iterable: list[list[int]] <: Iterable[?T1];
+
+# assert_type(list(map(collect, rows)), list[list[int]])
+assert list_arg: map[?S] <: Iterable[?U];
+assert list_result: list[?U] <: list[list[int]];

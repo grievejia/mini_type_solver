@@ -1,0 +1,8 @@
+class Box[+T];
+class A;
+metavar ?M;
+metavar ?N;
+
+assert Box[A] <: ?M;
+assert A <: ?M;
+assert Box[A] & A <: ?N;

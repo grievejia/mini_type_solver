@@ -1,0 +1,4 @@
+class a;
+class b;
+assert a <: b;
+assert a <: b;

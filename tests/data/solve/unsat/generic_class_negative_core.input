@@ -1,0 +1,7 @@
+class Dog;
+class Inv[T];
+metavar ?M;
+
+assert source: (?M) -> object <: forall Y. ((Inv[Y]) -> object) -> object;
+assert redundant: object <: object;
+assert demand: ?M <: (Inv[Dog]) -> object;

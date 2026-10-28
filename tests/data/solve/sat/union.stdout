@@ -1,0 +1,3 @@
+satisfiable
+model:
+  ?U = int | str

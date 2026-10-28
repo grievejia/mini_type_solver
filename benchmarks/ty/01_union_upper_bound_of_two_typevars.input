@@ -1,0 +1,24 @@
+# verdict: unsatisfiable
+# Source: ty mdtest type_properties/implies_subtype_of.md:1174
+#   Constraint implication / Transitivity / Transitivity should not introduce
+#   impossible constraints
+# ty: (int <= A <= T | U) and (T <= str) implies (int <= U). Adding
+# (U <= bytes) makes the constraint set unsatisfiable.
+#
+# The unit states constraint sets over type variables directly, so each type
+# variable is a metavariable and each bound is one assertion. The upper bound
+# of A is a union of two metavariables, so int must reach T or U through A.
+# The bound on T blocks the T arm, and the bound on U blocks the U arm. Without
+# `u_upper` the input is satisfiable, and int must go to U. That is the
+# implication that the unit checks. The core needs all four assertions.
+class int;
+class str;
+class bytes;
+metavar ?A;
+metavar ?T;
+metavar ?U;
+
+assert a_lower: int <: ?A;
+assert a_upper: ?A <: ?T | ?U;
+assert t_upper: ?T <: str;
+assert u_upper: ?U <: bytes;

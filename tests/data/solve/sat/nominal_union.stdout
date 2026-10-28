@@ -1,0 +1,3 @@
+satisfiable
+model:
+  ?X = N[C] | C

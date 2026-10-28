@@ -1,0 +1,3 @@
+class Inv[T];
+metavar ?M;
+assert forall X. (X) -> X <: forall Y. (Inv[Y]) -> ?M;

@@ -1,0 +1,5 @@
+class a;
+class b;
+class c extends a, b;
+class d extends b, a;
+class e extends c, d;

@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?X = never
+  ?Z = Box[never]

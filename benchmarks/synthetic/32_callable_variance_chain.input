@@ -1,0 +1,13 @@
+# verdict: satisfiable
+# Nested callable bounds propagate Dog through a parameter assignment and two
+# stored callable factors.
+class Animal;
+class Dog extends Animal;
+metavar ?P;
+metavar ?F;
+metavar ?G;
+assert Dog <: ?P;
+assert (?P) -> Dog <: ?F;
+assert ?F <: (Dog) -> Animal;
+assert (?F) -> Dog <: ?G;
+assert ?G <: ((Animal) -> Dog) -> Animal;

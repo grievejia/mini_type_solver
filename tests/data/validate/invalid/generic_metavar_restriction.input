@@ -1,0 +1,3 @@
+class A;
+metavar ?T;
+assert forall X in {?T}. (X) -> X <: object;

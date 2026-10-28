@@ -1,0 +1,4 @@
+class A;
+metavar ?T;
+
+assert forall X <: never. (X & ?T) -> A <: object;

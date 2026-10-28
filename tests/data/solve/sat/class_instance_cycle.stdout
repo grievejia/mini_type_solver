@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?M = object
+  ?T = mu R0. Inv[R0]

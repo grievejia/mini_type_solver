@@ -1,0 +1,5 @@
+satisfiable
+model:
+  ?T = int
+  ?U = int | str
+  ?V = never

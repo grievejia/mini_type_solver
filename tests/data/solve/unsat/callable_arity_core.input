@@ -1,0 +1,4 @@
+class A;
+metavar ?T;
+assert require_zero: () -> A <: ?T;
+assert require_one: ?T <: (A) -> A;

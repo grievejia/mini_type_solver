@@ -1,0 +1,39 @@
+# verdict: satisfiable
+# Large intersection: the lower and upper endpoints each contain 24 unrelated
+# classes. A satisfying model assigns the complete intersection to one
+# metavariable and never to the other.
+class c00;
+class c01;
+class c02;
+class c03;
+class c04;
+class c05;
+class c06;
+class c07;
+class c08;
+class c09;
+class c10;
+class c11;
+class c12;
+class c13;
+class c14;
+class c15;
+class c16;
+class c17;
+class c18;
+class c19;
+class c20;
+class c21;
+class c22;
+class c23;
+metavar ?T;
+metavar ?U;
+assert lower: c00 & c01 & c02 & c03 & c04 & c05 & c06 & c07
+    & c08 & c09 & c10 & c11 & c12 & c13 & c14 & c15
+    & c16 & c17 & c18 & c19 & c20 & c21 & c22 & c23 <: ?T | ?U;
+assert t_upper: ?T <: c00 & c01 & c02 & c03 & c04 & c05 & c06 & c07
+    & c08 & c09 & c10 & c11 & c12 & c13 & c14 & c15
+    & c16 & c17 & c18 & c19 & c20 & c21 & c22 & c23;
+assert u_upper: ?U <: c00 & c01 & c02 & c03 & c04 & c05 & c06 & c07
+    & c08 & c09 & c10 & c11 & c12 & c13 & c14 & c15
+    & c16 & c17 & c18 & c19 & c20 & c21 & c22 & c23;

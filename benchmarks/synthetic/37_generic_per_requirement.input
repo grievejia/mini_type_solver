@@ -1,0 +1,24 @@
+# verdict: satisfiable
+# The generic inside the tuple has eight return requirements. Each requirement
+# creates one instance at the same position. X selects the tuple that contains
+# the meet of all eight instances.
+class A;
+class B;
+class C;
+class D;
+class E;
+class F;
+class G;
+class H;
+assert forall X. (X) -> X
+    <: (tuple[forall Y. (Y) -> Y])
+       -> tuple[
+           ((A) -> A)
+           & ((B) -> B)
+           & ((C) -> C)
+           & ((D) -> D)
+           & ((E) -> E)
+           & ((F) -> F)
+           & ((G) -> G)
+           & ((H) -> H)
+       ];

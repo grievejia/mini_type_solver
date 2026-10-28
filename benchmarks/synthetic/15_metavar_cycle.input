@@ -1,0 +1,13 @@
+# verdict: satisfiable
+# Metavariable cycle: ?A and ?B constrain each other and share one
+# compatible bound pair. The model assigns ?A = ?B = a.
+# Assignment growth must revisit both cycle edges before the component
+# can satisfy every obligation.
+class q;
+class a extends q;
+metavar ?A;
+metavar ?B;
+assert low: a <: ?A;
+assert c1: ?A <: ?B;
+assert c2: ?B <: ?A;
+assert high: ?B <: q;

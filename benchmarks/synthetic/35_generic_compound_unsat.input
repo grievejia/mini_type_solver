@@ -1,0 +1,22 @@
+# verdict: unsatisfiable
+# ?F stores the generic identity. A choice (P) -> R needs P <: R, and no choice
+# in upper passes that test. Thus store and upper form the core. The generic
+# bounds on ?G and ?H and the use of ?G hold alone, so core reduction removes
+# them.
+class A;
+class B;
+metavar ?F;
+metavar ?G;
+metavar ?H;
+assert store: forall X. (X) -> X <: ?F;
+assert noise_g: forall Y. (Y) -> tuple[Y] <: ?G;
+assert noise_h: forall Z. (Z, Z) -> Z <: ?H;
+assert use_g: ?G <: (A) -> tuple[A];
+assert upper: (?F <: (A) -> B)
+    or (?F <: (B) -> A)
+    or (?F <: (A) -> (A & B))
+    or (?F <: (B) -> (A & B))
+    or (?F <: (A | B) -> A)
+    or (?F <: (A | B) -> B)
+    or (?F <: (A | B) -> (A & B))
+    or (?F <: (A) -> never);

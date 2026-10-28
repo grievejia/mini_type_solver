@@ -1,0 +1,28 @@
+# verdict: satisfiable
+# The upper type has 16 outer factors, each with a 16-factor return
+# intersection. The seed satisfies all 16 * 16 = 256 inner factors. Each left
+# Boolean choice adds a failing lower callable to ?F; each right choice is
+# neutral. Only the all-neutral combination works. DNF materializes 64 terms,
+# while direct search can reject each failing choice before combining siblings.
+class A;
+class B;
+class C;
+class D;
+class N0;
+class N1;
+class N2;
+class N3;
+class N4;
+class N5;
+metavar ?F;
+assert upper: ?F
+    <: forall X in {A, B, C, D}, Y in {A, B, C, D}.
+       (X, Y) -> forall Z in {A, B, C, D}, W in {A, B, C, D}.
+                    (Z, W) -> tuple[X, Y, Z, W];
+assert seed: (object, object) -> (object, object) -> never <: ?F;
+assert c0: ((A, A) -> (object, object) -> never <: ?F) or (N0 <: N0);
+assert c1: ((B, B) -> (object, object) -> never <: ?F) or (N1 <: N1);
+assert c2: ((C, C) -> (object, object) -> never <: ?F) or (N2 <: N2);
+assert c3: ((D, D) -> (object, object) -> never <: ?F) or (N3 <: N3);
+assert c4: ((A, B) -> (object, object) -> never <: ?F) or (N4 <: N4);
+assert c5: ((C, D) -> (object, object) -> never <: ?F) or (N5 <: N5);

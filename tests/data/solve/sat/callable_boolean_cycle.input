@@ -1,0 +1,3 @@
+class A;
+metavar ?T;
+assert ((?T) -> A <: ?T) or (object <: object);

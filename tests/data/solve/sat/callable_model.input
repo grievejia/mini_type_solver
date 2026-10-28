@@ -1,0 +1,7 @@
+class A;
+class C;
+class B extends C;
+metavar ?U;
+metavar ?T;
+assert store_callable: (?U) -> B <: ?T;
+assert close_callable: ?T <: (A) -> C;

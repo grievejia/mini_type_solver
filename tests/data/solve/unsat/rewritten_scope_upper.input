@@ -1,0 +1,6 @@
+class B;
+metavar ?T;
+
+assert ?T <: forall Z. (Z) -> Z;
+assert (() -> ?T) -> B
+    <: forall X. (() -> forall Y. (Y & X) -> (Y & X)) -> B;

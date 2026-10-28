@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?U = A
+  ?T = (A) -> B

@@ -1,0 +1,5 @@
+# verdict: unsatisfiable
+# Baseline: one false primitive. The core is [bad].
+class dog;
+class cat;
+assert bad: dog <: cat;

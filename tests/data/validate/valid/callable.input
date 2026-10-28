@@ -1,0 +1,17 @@
+class A;
+class B;
+metavar ?Upper;
+metavar ?Lower;
+metavar ?Target;
+metavar ?X;
+metavar ?Y;
+assert zero: () -> A <: object;
+assert one: (A) -> B <: object;
+assert multiple: (A, B) -> A <: object;
+assert nested: ((A) -> B) -> (B) -> A <: object;
+assert tuple_mix: (tuple[A]) -> tuple[B] <: object;
+assert upper_only: ?Upper <: (?Upper) -> A;
+assert lower_only: (?Lower) -> B <: ?Target;
+assert matching: (?X) -> A <: (?Y) -> A;
+assert ordinary_back: ?X <: ?Y;
+assert different_count: (A) -> A <: (A, A) -> A;

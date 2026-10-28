@@ -1,0 +1,4 @@
+class Inv[T];
+metavar ?T;
+
+assert comparison: (Inv[?T]) -> object <: forall Y. (Inv[Y]) -> object;

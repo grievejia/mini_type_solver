@@ -1,0 +1,37 @@
+# verdict: satisfiable
+# Independent variables: six metavariables with isolated bounds and
+# a local binary choice each. The left side of every choice is dead,
+# so exactly one of 64 combinations works. The model assigns ?M0 = a0
+# through ?M5 = a5. Stresses variable count without any
+# coupling between the choices.
+class b0;
+class a0 extends b0;
+class b1;
+class a1 extends b1;
+class b2;
+class a2 extends b2;
+class b3;
+class a3 extends b3;
+class b4;
+class a4 extends b4;
+class b5;
+class a5 extends b5;
+class z;
+metavar ?M0;
+metavar ?M1;
+metavar ?M2;
+metavar ?M3;
+metavar ?M4;
+metavar ?M5;
+assert m0_low: a0 <: ?M0;
+assert m0_choice: (?M0 <: z) or (a0 <: ?M0);
+assert m1_low: a1 <: ?M1;
+assert m1_choice: (?M1 <: z) or (a1 <: ?M1);
+assert m2_low: a2 <: ?M2;
+assert m2_choice: (?M2 <: z) or (a2 <: ?M2);
+assert m3_low: a3 <: ?M3;
+assert m3_choice: (?M3 <: z) or (a3 <: ?M3);
+assert m4_low: a4 <: ?M4;
+assert m4_choice: (?M4 <: z) or (a4 <: ?M4);
+assert m5_low: a5 <: ?M5;
+assert m5_choice: (?M5 <: z) or (a5 <: ?M5);

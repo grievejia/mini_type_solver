@@ -1,0 +1,10 @@
+# verdict: satisfiable
+# Repeated nested tuple references close to the same A | B assignment.
+class A;
+class B;
+metavar ?U;
+metavar ?T;
+assert A <: ?U;
+assert B <: ?U;
+assert tuple[?U, ?U, tuple[?U, ?U]] <: ?T;
+assert ?T <: tuple[A | B, A | B, tuple[A | B, A | B]];

@@ -1,0 +1,7 @@
+class B;
+metavar ?M;
+metavar ?X;
+metavar ?R;
+assert (?M) -> B <: ?X;
+assert ?X <: (tuple[?R]) -> B;
+assert ?M <: ?R;

@@ -1,0 +1,577 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 784,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 65,
+                    end: 93,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 71,
+                        end: 77,
+                    },
+                    name: "number",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 86,
+                            end: 92,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 86,
+                                end: 92,
+                            },
+                            name: "object",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 94,
+                    end: 119,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 100,
+                        end: 103,
+                    },
+                    name: "int",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 112,
+                            end: 118,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 112,
+                                end: 118,
+                            },
+                            name: "number",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 120,
+                    end: 147,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 126,
+                        end: 131,
+                    },
+                    name: "float",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 140,
+                            end: 146,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 140,
+                                end: 146,
+                            },
+                            name: "number",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 148,
+                    end: 173,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 154,
+                        end: 157,
+                    },
+                    name: "str",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 166,
+                            end: 172,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 166,
+                                end: 172,
+                            },
+                            name: "object",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 174,
+                    end: 208,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 180,
+                        end: 192,
+                    },
+                    name: "serializable",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 201,
+                            end: 207,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 201,
+                                end: 207,
+                            },
+                            name: "object",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 273,
+                    end: 323,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 279,
+                        end: 293,
+                    },
+                    name: "special_number",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 302,
+                            end: 308,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 302,
+                                end: 308,
+                            },
+                            name: "number",
+                        },
+                        arguments: None,
+                    },
+                    SuperclassExpr {
+                        span: Span {
+                            start: 310,
+                            end: 322,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 310,
+                                end: 322,
+                            },
+                            name: "serializable",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 395,
+                    end: 406,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 403,
+                        end: 405,
+                    },
+                    name: "T",
+                },
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 407,
+                    end: 418,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 415,
+                        end: 417,
+                    },
+                    name: "U",
+                },
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 419,
+                    end: 430,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 427,
+                        end: 429,
+                    },
+                    name: "V",
+                },
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 432,
+                    end: 466,
+                },
+                label: Some(
+                    Ident {
+                        span: Span {
+                            start: 439,
+                            end: 450,
+                        },
+                        name: "lower_bound",
+                    },
+                ),
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 456,
+                            end: 465,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 456,
+                                    end: 459,
+                                },
+                                name: "int",
+                            },
+                        ),
+                        right: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 463,
+                                    end: 465,
+                                },
+                                name: "T",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 468,
+                    end: 525,
+                },
+                label: Some(
+                    Ident {
+                        span: Span {
+                            start: 475,
+                            end: 489,
+                        },
+                        name: "possible_upper",
+                    },
+                ),
+                formula: Or(
+                    Nary {
+                        span: Span {
+                            start: 495,
+                            end: 524,
+                        },
+                        first: Paren(
+                            Paren {
+                                span: Span {
+                                    start: 495,
+                                    end: 506,
+                                },
+                                inner: Subtype(
+                                    Subtype {
+                                        span: Span {
+                                            start: 496,
+                                            end: 505,
+                                        },
+                                        left: MetaName(
+                                            Ident {
+                                                span: Span {
+                                                    start: 496,
+                                                    end: 498,
+                                                },
+                                                name: "T",
+                                            },
+                                        ),
+                                        right: Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 502,
+                                                    end: 505,
+                                                },
+                                                name: "str",
+                                            },
+                                        ),
+                                    },
+                                ),
+                            },
+                        ),
+                        second: (
+                            Span {
+                                start: 507,
+                                end: 509,
+                            },
+                            Paren(
+                                Paren {
+                                    span: Span {
+                                        start: 510,
+                                        end: 524,
+                                    },
+                                    inner: Subtype(
+                                        Subtype {
+                                            span: Span {
+                                                start: 511,
+                                                end: 523,
+                                            },
+                                            left: MetaName(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 511,
+                                                        end: 513,
+                                                    },
+                                                    name: "T",
+                                                },
+                                            ),
+                                            right: Name(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 517,
+                                                        end: 523,
+                                                    },
+                                                    name: "number",
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                        rest: [],
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 559,
+                    end: 579,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 566,
+                            end: 578,
+                        },
+                        left: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 566,
+                                    end: 568,
+                                },
+                                name: "T",
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 572,
+                                    end: 578,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 640,
+                    end: 657,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 647,
+                            end: 656,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 647,
+                                    end: 650,
+                                },
+                                name: "int",
+                            },
+                        ),
+                        right: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 654,
+                                    end: 656,
+                                },
+                                name: "U",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 658,
+                    end: 675,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 665,
+                            end: 674,
+                        },
+                        left: Name(
+                            Ident {
+                                span: Span {
+                                    start: 665,
+                                    end: 668,
+                                },
+                                name: "str",
+                            },
+                        ),
+                        right: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 672,
+                                    end: 674,
+                                },
+                                name: "U",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 736,
+                    end: 756,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 743,
+                            end: 755,
+                        },
+                        left: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 743,
+                                    end: 745,
+                                },
+                                name: "V",
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 749,
+                                    end: 755,
+                                },
+                                name: "number",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 757,
+                    end: 783,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 764,
+                            end: 782,
+                        },
+                        left: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 764,
+                                    end: 766,
+                                },
+                                name: "V",
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 770,
+                                    end: 782,
+                                },
+                                name: "serializable",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

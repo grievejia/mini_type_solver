@@ -1,0 +1,19 @@
+class Animal;
+class Dog extends Animal;
+class T[+U];
+class B[T] extends T[object];
+class Base[+T];
+class Left[T] extends Base[tuple[T]];
+class Right[T] extends Base[tuple[T]];
+class Diamond[T] extends Right[T], Left[T];
+class Parent[+T];
+class Inv[T] extends Parent[T];
+
+assert B[Dog] <: T[object];
+assert Diamond[Dog] <: Base[tuple[Animal]];
+assert forall X. (X) -> Inv[X] <: forall Y. (Y) -> Parent[object];
+assert forall X. () -> Inv[forall Z. (Z) -> X]
+    <: forall Y. () -> Inv[forall W. (W) -> Y];
+assert forall X. (X) -> X <: forall Y. (Inv[Y]) -> Inv[Y];
+assert forall X. (X) -> object
+    <: ((forall T. (tuple[T]) -> T) -> object) -> object;

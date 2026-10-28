@@ -1,0 +1,1097 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 437,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 8,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 7,
+                    },
+                    name: "X",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 10,
+                    end: 64,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 17,
+                            end: 63,
+                        },
+                        left: Generic(
+                            GenericCallableTypeExpr {
+                                span: Span {
+                                    start: 17,
+                                    end: 41,
+                                },
+                                keyword: Span {
+                                    start: 17,
+                                    end: 23,
+                                },
+                                parameters: [
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 24,
+                                                end: 25,
+                                            },
+                                            name: "X",
+                                        },
+                                    },
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 27,
+                                                end: 28,
+                                            },
+                                            name: "Y",
+                                        },
+                                    },
+                                ],
+                                dot: Span {
+                                    start: 28,
+                                    end: 29,
+                                },
+                                body: CallableTypeExpr {
+                                    span: Span {
+                                        start: 30,
+                                        end: 41,
+                                    },
+                                    arrow: Span {
+                                        start: 37,
+                                        end: 39,
+                                    },
+                                    params: [
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 31,
+                                                    end: 32,
+                                                },
+                                                name: "X",
+                                            },
+                                        ),
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 34,
+                                                    end: 35,
+                                                },
+                                                name: "Y",
+                                            },
+                                        ),
+                                    ],
+                                    ret: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 40,
+                                                end: 41,
+                                            },
+                                            name: "X",
+                                        },
+                                    ),
+                                },
+                            },
+                        ),
+                        right: Generic(
+                            GenericCallableTypeExpr {
+                                span: Span {
+                                    start: 45,
+                                    end: 63,
+                                },
+                                keyword: Span {
+                                    start: 45,
+                                    end: 51,
+                                },
+                                parameters: [
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 52,
+                                                end: 53,
+                                            },
+                                            name: "Z",
+                                        },
+                                    },
+                                ],
+                                dot: Span {
+                                    start: 53,
+                                    end: 54,
+                                },
+                                body: CallableTypeExpr {
+                                    span: Span {
+                                        start: 55,
+                                        end: 63,
+                                    },
+                                    arrow: Span {
+                                        start: 59,
+                                        end: 61,
+                                    },
+                                    params: [
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 56,
+                                                    end: 57,
+                                                },
+                                                name: "Z",
+                                            },
+                                        ),
+                                    ],
+                                    ret: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 62,
+                                                end: 63,
+                                            },
+                                            name: "Z",
+                                        },
+                                    ),
+                                },
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 65,
+                    end: 107,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 72,
+                            end: 106,
+                        },
+                        left: Generic(
+                            GenericCallableTypeExpr {
+                                span: Span {
+                                    start: 72,
+                                    end: 96,
+                                },
+                                keyword: Span {
+                                    start: 72,
+                                    end: 78,
+                                },
+                                parameters: [
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 79,
+                                                end: 80,
+                                            },
+                                            name: "Y",
+                                        },
+                                    },
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 82,
+                                                end: 83,
+                                            },
+                                            name: "X",
+                                        },
+                                    },
+                                ],
+                                dot: Span {
+                                    start: 83,
+                                    end: 84,
+                                },
+                                body: CallableTypeExpr {
+                                    span: Span {
+                                        start: 85,
+                                        end: 96,
+                                    },
+                                    arrow: Span {
+                                        start: 92,
+                                        end: 94,
+                                    },
+                                    params: [
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 86,
+                                                    end: 87,
+                                                },
+                                                name: "X",
+                                            },
+                                        ),
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 89,
+                                                    end: 90,
+                                                },
+                                                name: "Y",
+                                            },
+                                        ),
+                                    ],
+                                    ret: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 95,
+                                                end: 96,
+                                            },
+                                            name: "X",
+                                        },
+                                    ),
+                                },
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 100,
+                                    end: 106,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 108,
+                    end: 170,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 115,
+                            end: 169,
+                        },
+                        left: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 115,
+                                    end: 140,
+                                },
+                                elements: [
+                                    Generic(
+                                        GenericCallableTypeExpr {
+                                            span: Span {
+                                                start: 121,
+                                                end: 139,
+                                            },
+                                            keyword: Span {
+                                                start: 121,
+                                                end: 127,
+                                            },
+                                            parameters: [
+                                                Plain {
+                                                    name: Ident {
+                                                        span: Span {
+                                                            start: 128,
+                                                            end: 129,
+                                                        },
+                                                        name: "X",
+                                                    },
+                                                },
+                                            ],
+                                            dot: Span {
+                                                start: 129,
+                                                end: 130,
+                                            },
+                                            body: CallableTypeExpr {
+                                                span: Span {
+                                                    start: 131,
+                                                    end: 139,
+                                                },
+                                                arrow: Span {
+                                                    start: 135,
+                                                    end: 137,
+                                                },
+                                                params: [
+                                                    Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 132,
+                                                                end: 133,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    ),
+                                                ],
+                                                ret: Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 138,
+                                                            end: 139,
+                                                        },
+                                                        name: "X",
+                                                    },
+                                                ),
+                                            },
+                                        },
+                                    ),
+                                ],
+                            },
+                        ),
+                        right: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 144,
+                                    end: 169,
+                                },
+                                elements: [
+                                    Generic(
+                                        GenericCallableTypeExpr {
+                                            span: Span {
+                                                start: 150,
+                                                end: 168,
+                                            },
+                                            keyword: Span {
+                                                start: 150,
+                                                end: 156,
+                                            },
+                                            parameters: [
+                                                Plain {
+                                                    name: Ident {
+                                                        span: Span {
+                                                            start: 157,
+                                                            end: 158,
+                                                        },
+                                                        name: "Y",
+                                                    },
+                                                },
+                                            ],
+                                            dot: Span {
+                                                start: 158,
+                                                end: 159,
+                                            },
+                                            body: CallableTypeExpr {
+                                                span: Span {
+                                                    start: 160,
+                                                    end: 168,
+                                                },
+                                                arrow: Span {
+                                                    start: 164,
+                                                    end: 166,
+                                                },
+                                                params: [
+                                                    Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 161,
+                                                                end: 162,
+                                                            },
+                                                            name: "Y",
+                                                        },
+                                                    ),
+                                                ],
+                                                ret: Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 167,
+                                                            end: 168,
+                                                        },
+                                                        name: "Y",
+                                                    },
+                                                ),
+                                            },
+                                        },
+                                    ),
+                                ],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 171,
+                    end: 213,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 178,
+                            end: 212,
+                        },
+                        left: Union(
+                            Nary {
+                                span: Span {
+                                    start: 178,
+                                    end: 202,
+                                },
+                                first: Paren(
+                                    ParenTypeExpr {
+                                        span: Span {
+                                            start: 178,
+                                            end: 198,
+                                        },
+                                        inner: Generic(
+                                            GenericCallableTypeExpr {
+                                                span: Span {
+                                                    start: 179,
+                                                    end: 197,
+                                                },
+                                                keyword: Span {
+                                                    start: 179,
+                                                    end: 185,
+                                                },
+                                                parameters: [
+                                                    Plain {
+                                                        name: Ident {
+                                                            span: Span {
+                                                                start: 186,
+                                                                end: 187,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    },
+                                                ],
+                                                dot: Span {
+                                                    start: 187,
+                                                    end: 188,
+                                                },
+                                                body: CallableTypeExpr {
+                                                    span: Span {
+                                                        start: 189,
+                                                        end: 197,
+                                                    },
+                                                    arrow: Span {
+                                                        start: 193,
+                                                        end: 195,
+                                                    },
+                                                    params: [
+                                                        Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 190,
+                                                                    end: 191,
+                                                                },
+                                                                name: "X",
+                                                            },
+                                                        ),
+                                                    ],
+                                                    ret: Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 196,
+                                                                end: 197,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    ),
+                                                },
+                                            },
+                                        ),
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 199,
+                                        end: 200,
+                                    },
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 201,
+                                                end: 202,
+                                            },
+                                            name: "A",
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 206,
+                                    end: 212,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 214,
+                    end: 256,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 221,
+                            end: 255,
+                        },
+                        left: Intersection(
+                            Nary {
+                                span: Span {
+                                    start: 221,
+                                    end: 245,
+                                },
+                                first: Paren(
+                                    ParenTypeExpr {
+                                        span: Span {
+                                            start: 221,
+                                            end: 241,
+                                        },
+                                        inner: Generic(
+                                            GenericCallableTypeExpr {
+                                                span: Span {
+                                                    start: 222,
+                                                    end: 240,
+                                                },
+                                                keyword: Span {
+                                                    start: 222,
+                                                    end: 228,
+                                                },
+                                                parameters: [
+                                                    Plain {
+                                                        name: Ident {
+                                                            span: Span {
+                                                                start: 229,
+                                                                end: 230,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    },
+                                                ],
+                                                dot: Span {
+                                                    start: 230,
+                                                    end: 231,
+                                                },
+                                                body: CallableTypeExpr {
+                                                    span: Span {
+                                                        start: 232,
+                                                        end: 240,
+                                                    },
+                                                    arrow: Span {
+                                                        start: 236,
+                                                        end: 238,
+                                                    },
+                                                    params: [
+                                                        Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 233,
+                                                                    end: 234,
+                                                                },
+                                                                name: "X",
+                                                            },
+                                                        ),
+                                                    ],
+                                                    ret: Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 239,
+                                                                end: 240,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    ),
+                                                },
+                                            },
+                                        ),
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 242,
+                                        end: 243,
+                                    },
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 244,
+                                                end: 245,
+                                            },
+                                            name: "A",
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 249,
+                                    end: 255,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 257,
+                    end: 317,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 264,
+                            end: 316,
+                        },
+                        left: Callable(
+                            CallableTypeExpr {
+                                span: Span {
+                                    start: 264,
+                                    end: 306,
+                                },
+                                arrow: Span {
+                                    start: 285,
+                                    end: 287,
+                                },
+                                params: [
+                                    Generic(
+                                        GenericCallableTypeExpr {
+                                            span: Span {
+                                                start: 265,
+                                                end: 283,
+                                            },
+                                            keyword: Span {
+                                                start: 265,
+                                                end: 271,
+                                            },
+                                            parameters: [
+                                                Plain {
+                                                    name: Ident {
+                                                        span: Span {
+                                                            start: 272,
+                                                            end: 273,
+                                                        },
+                                                        name: "X",
+                                                    },
+                                                },
+                                            ],
+                                            dot: Span {
+                                                start: 273,
+                                                end: 274,
+                                            },
+                                            body: CallableTypeExpr {
+                                                span: Span {
+                                                    start: 275,
+                                                    end: 283,
+                                                },
+                                                arrow: Span {
+                                                    start: 279,
+                                                    end: 281,
+                                                },
+                                                params: [
+                                                    Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 276,
+                                                                end: 277,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    ),
+                                                ],
+                                                ret: Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 282,
+                                                            end: 283,
+                                                        },
+                                                        name: "X",
+                                                    },
+                                                ),
+                                            },
+                                        },
+                                    ),
+                                ],
+                                ret: Generic(
+                                    GenericCallableTypeExpr {
+                                        span: Span {
+                                            start: 288,
+                                            end: 306,
+                                        },
+                                        keyword: Span {
+                                            start: 288,
+                                            end: 294,
+                                        },
+                                        parameters: [
+                                            Plain {
+                                                name: Ident {
+                                                    span: Span {
+                                                        start: 295,
+                                                        end: 296,
+                                                    },
+                                                    name: "Y",
+                                                },
+                                            },
+                                        ],
+                                        dot: Span {
+                                            start: 296,
+                                            end: 297,
+                                        },
+                                        body: CallableTypeExpr {
+                                            span: Span {
+                                                start: 298,
+                                                end: 306,
+                                            },
+                                            arrow: Span {
+                                                start: 302,
+                                                end: 304,
+                                            },
+                                            params: [
+                                                Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 299,
+                                                            end: 300,
+                                                        },
+                                                        name: "Y",
+                                                    },
+                                                ),
+                                            ],
+                                            ret: Name(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 305,
+                                                        end: 306,
+                                                    },
+                                                    name: "Y",
+                                                },
+                                            ),
+                                        },
+                                    },
+                                ),
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 310,
+                                    end: 316,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 318,
+                    end: 371,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 325,
+                            end: 370,
+                        },
+                        left: Generic(
+                            GenericCallableTypeExpr {
+                                span: Span {
+                                    start: 325,
+                                    end: 360,
+                                },
+                                keyword: Span {
+                                    start: 325,
+                                    end: 331,
+                                },
+                                parameters: [
+                                    Plain {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 332,
+                                                end: 333,
+                                            },
+                                            name: "X",
+                                        },
+                                    },
+                                ],
+                                dot: Span {
+                                    start: 333,
+                                    end: 334,
+                                },
+                                body: CallableTypeExpr {
+                                    span: Span {
+                                        start: 335,
+                                        end: 360,
+                                    },
+                                    arrow: Span {
+                                        start: 356,
+                                        end: 358,
+                                    },
+                                    params: [
+                                        Generic(
+                                            GenericCallableTypeExpr {
+                                                span: Span {
+                                                    start: 336,
+                                                    end: 354,
+                                                },
+                                                keyword: Span {
+                                                    start: 336,
+                                                    end: 342,
+                                                },
+                                                parameters: [
+                                                    Plain {
+                                                        name: Ident {
+                                                            span: Span {
+                                                                start: 343,
+                                                                end: 344,
+                                                            },
+                                                            name: "Y",
+                                                        },
+                                                    },
+                                                ],
+                                                dot: Span {
+                                                    start: 344,
+                                                    end: 345,
+                                                },
+                                                body: CallableTypeExpr {
+                                                    span: Span {
+                                                        start: 346,
+                                                        end: 354,
+                                                    },
+                                                    arrow: Span {
+                                                        start: 350,
+                                                        end: 352,
+                                                    },
+                                                    params: [
+                                                        Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 347,
+                                                                    end: 348,
+                                                                },
+                                                                name: "Y",
+                                                            },
+                                                        ),
+                                                    ],
+                                                    ret: Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 353,
+                                                                end: 354,
+                                                            },
+                                                            name: "X",
+                                                        },
+                                                    ),
+                                                },
+                                            },
+                                        ),
+                                    ],
+                                    ret: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 359,
+                                                end: 360,
+                                            },
+                                            name: "X",
+                                        },
+                                    ),
+                                },
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 364,
+                                    end: 370,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 372,
+                    end: 436,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 379,
+                            end: 435,
+                        },
+                        left: Generic(
+                            GenericCallableTypeExpr {
+                                span: Span {
+                                    start: 379,
+                                    end: 425,
+                                },
+                                keyword: Span {
+                                    start: 379,
+                                    end: 385,
+                                },
+                                parameters: [
+                                    UpperBound {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 386,
+                                                end: 387,
+                                            },
+                                            name: "X",
+                                        },
+                                        operator: Span {
+                                            start: 388,
+                                            end: 390,
+                                        },
+                                        upper: Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 391,
+                                                    end: 392,
+                                                },
+                                                name: "A",
+                                            },
+                                        ),
+                                    },
+                                    ExactSet {
+                                        name: Ident {
+                                            span: Span {
+                                                start: 394,
+                                                end: 395,
+                                            },
+                                            name: "Y",
+                                        },
+                                        keyword: Span {
+                                            start: 396,
+                                            end: 398,
+                                        },
+                                        open_brace: Span {
+                                            start: 399,
+                                            end: 400,
+                                        },
+                                        first: Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 400,
+                                                    end: 401,
+                                                },
+                                                name: "A",
+                                            },
+                                        ),
+                                        rest: [
+                                            Tuple(
+                                                TupleTypeExpr {
+                                                    span: Span {
+                                                        start: 403,
+                                                        end: 411,
+                                                    },
+                                                    elements: [
+                                                        Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 409,
+                                                                    end: 410,
+                                                                },
+                                                                name: "B",
+                                                            },
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                        ],
+                                        close_brace: Span {
+                                            start: 411,
+                                            end: 412,
+                                        },
+                                    },
+                                ],
+                                dot: Span {
+                                    start: 412,
+                                    end: 413,
+                                },
+                                body: CallableTypeExpr {
+                                    span: Span {
+                                        start: 414,
+                                        end: 425,
+                                    },
+                                    arrow: Span {
+                                        start: 421,
+                                        end: 423,
+                                    },
+                                    params: [
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 415,
+                                                    end: 416,
+                                                },
+                                                name: "X",
+                                            },
+                                        ),
+                                        Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 418,
+                                                    end: 419,
+                                                },
+                                                name: "Y",
+                                            },
+                                        ),
+                                    ],
+                                    ret: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 424,
+                                                end: 425,
+                                            },
+                                            name: "X",
+                                        },
+                                    ),
+                                },
+                            },
+                        ),
+                        right: Name(
+                            Ident {
+                                span: Span {
+                                    start: 429,
+                                    end: 435,
+                                },
+                                name: "object",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

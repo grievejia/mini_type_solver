@@ -1,0 +1,23 @@
+# verdict: satisfiable
+# The seed restricted identity satisfies the upper callable with X = A. Each
+# left Boolean choice adds a different failing restricted generic factor to
+# ?F; each right choice is neutral. Only the all-neutral combination works.
+# DNF materializes 64 terms, while direct search rejects each left choice
+# before it combines independent siblings.
+class A;
+class B;
+class N0;
+class N1;
+class N2;
+class N3;
+class N4;
+class N5;
+metavar ?F;
+assert upper: ?F <: (A) -> A;
+assert seed: forall X <: A | B. (X) -> X <: ?F;
+assert c0: (forall X <: A | B. (X) -> B <: ?F) or (N0 <: N0);
+assert c1: (forall X <: A | B. (X) -> (A | B) <: ?F) or (N1 <: N1);
+assert c2: (forall X <: A | B. (A | X) -> B <: ?F) or (N2 <: N2);
+assert c3: (forall X <: A | B. (tuple[X]) -> B <: ?F) or (N3 <: N3);
+assert c4: (forall X <: A | B. (X) -> tuple[A] <: ?F) or (N4 <: N4);
+assert c5: (forall X <: A | B. (X, X) -> X <: ?F) or (N5 <: N5);

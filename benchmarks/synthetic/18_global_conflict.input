@@ -1,0 +1,12 @@
+# verdict: unsatisfiable
+# Non-flat core: both sides of the disjunction fail against the same
+# lower bound, each for its own reason. The [low, upper_choice] core
+# needs the whole disjunction because no single atom set explains the
+# failure.
+class number;
+class int extends number;
+class str;
+class float;
+metavar ?T;
+assert low: int <: ?T;
+assert upper_choice: (?T <: str) or (?T <: float);

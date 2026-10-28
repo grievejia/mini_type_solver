@@ -1,0 +1,4 @@
+class a;
+class b;
+metavar ?T;
+assert (a | ?T) <: a | b;

@@ -1,0 +1,22 @@
+# verdict: satisfiable
+# The first return element keeps X equal to rigid Y. Covariant transfers widen
+# X to object. Contravariant transfers narrow X to never. Nested tuple shapes
+# make each conversion recurse before it reaches a separate destination.
+class A;
+metavar ?Covariant;
+metavar ?NestedCovariant;
+metavar ?Contravariant;
+metavar ?NestedContravariant;
+assert forall X. (X) -> tuple[
+    X,
+    tuple[X],
+    tuple[tuple[X]],
+    (X) -> A,
+    (tuple[X]) -> A
+] <: forall Y. (Y) -> tuple[
+    Y,
+    ?Covariant,
+    ?NestedCovariant,
+    ?Contravariant,
+    ?NestedContravariant
+];

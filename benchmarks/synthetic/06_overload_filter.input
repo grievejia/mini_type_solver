@@ -1,0 +1,12 @@
+# verdict: satisfiable
+# Overload filtering: one shared upper bound rules out str. A valid
+# model contains int, float, or both, depending on which compatible
+# alternatives the engine activates. Engines that try the leftmost
+# branch first must backtrack or learn before settling.
+class number;
+class int extends number;
+class float extends number;
+class str;
+metavar ?R;
+assert result_upper: ?R <: number;
+assert overload: (str <: ?R) or (int <: ?R) or (float <: ?R);

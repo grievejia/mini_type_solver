@@ -1,0 +1,3 @@
+class a extends object;
+metavar ?T;
+metavar ?U;

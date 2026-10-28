@@ -1,0 +1,8 @@
+satisfiable
+model:
+  ?Arg = Dog
+  ?Nested = Pair[Child[Dog], Inv[Dog] | ((Dog) -> Animal)]
+  ?Overlap = Inv[Animal] & Inv[Dog]
+  ?Empty = Inv[never]
+  ?Retained = forall T0. () -> Inv[forall T1. (T1) -> T0]
+  ?Inactive = unconstrained

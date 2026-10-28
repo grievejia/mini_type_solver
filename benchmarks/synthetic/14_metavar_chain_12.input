@@ -1,0 +1,32 @@
+# verdict: satisfiable
+# Long metavariable chain: 12 variables linked by edges and anchored
+# at both ends by compatible bounds. Every ?Mi is lo in the model.
+# Assignment growth must cross 11 edges. The final upper obligation
+# checks the value that reaches the end of the chain.
+class hi;
+class lo extends hi;
+metavar ?M0;
+metavar ?M1;
+metavar ?M2;
+metavar ?M3;
+metavar ?M4;
+metavar ?M5;
+metavar ?M6;
+metavar ?M7;
+metavar ?M8;
+metavar ?M9;
+metavar ?M10;
+metavar ?M11;
+assert low: lo <: ?M0;
+assert e00: ?M0 <: ?M1;
+assert e01: ?M1 <: ?M2;
+assert e02: ?M2 <: ?M3;
+assert e03: ?M3 <: ?M4;
+assert e04: ?M4 <: ?M5;
+assert e05: ?M5 <: ?M6;
+assert e06: ?M6 <: ?M7;
+assert e07: ?M7 <: ?M8;
+assert e08: ?M8 <: ?M9;
+assert e09: ?M9 <: ?M10;
+assert e10: ?M10 <: ?M11;
+assert high: ?M11 <: hi;

@@ -1,0 +1,4 @@
+unsatisfiable
+core:
+  require_a
+  require_b

@@ -1,0 +1,7 @@
+class B;
+class C;
+metavar ?U;
+metavar ?T;
+assert lower_b: B <: ?U;
+assert lower_c: C <: ?U;
+assert close_tuple: tuple[?U, ?U] <: ?T;

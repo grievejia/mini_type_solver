@@ -1,0 +1,5 @@
+class B;
+metavar ?T;
+
+assert (() -> ?T) -> B
+    <: forall X. (() -> forall Y <: X. (Y) -> Y) -> B;

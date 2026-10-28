@@ -1,0 +1,5 @@
+class Animal;
+class Dog extends Animal;
+metavar ?T;
+assert require_lower: (Dog) -> Dog <: ?T;
+assert require_upper: ?T <: (Animal) -> Animal;

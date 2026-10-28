@@ -1,0 +1,27 @@
+# verdict: satisfiable
+# Wide hierarchy: 12 sibling classes below one common base. Four
+# unrelated lower bounds must each satisfy the common upper bound.
+# The model has ?U = s0 | s3 | s6 | s9 and ?V = s1. This measures union
+# construction and repeated lower-against-upper checks.
+class base;
+class s0 extends base;
+class s1 extends base;
+class s2 extends base;
+class s3 extends base;
+class s4 extends base;
+class s5 extends base;
+class s6 extends base;
+class s7 extends base;
+class s8 extends base;
+class s9 extends base;
+class s10 extends base;
+class s11 extends base;
+metavar ?U;
+metavar ?V;
+assert u0: s0 <: ?U;
+assert u1: s3 <: ?U;
+assert u2: s6 <: ?U;
+assert u3: s9 <: ?U;
+assert u_high: ?U <: base;
+assert v_low: s1 <: ?V;
+assert v_high: ?V <: s1;

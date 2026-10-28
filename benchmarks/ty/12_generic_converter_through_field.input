@@ -1,0 +1,40 @@
+# verdict: unsatisfiable
+# Source: ty mdtest dataclasses/dataclass_transform.md:2286
+#   `typing.dataclass_transform` / Converters (the block with `duplicate`)
+# ty: the `__init__` parameter type of field `b` is Unknown today. The TODOs
+# say it should be int, and that `WithGenericClassConverter(..., "foo")`
+# should be an error.
+#
+#   def field[T, R](*, converter: Callable[[T], R] | None = None,
+#                   default: T | None = None) -> R
+#   def duplicate[T](x: T) -> tuple[T, T]
+#   @my_model
+#   class WithGenericClassConverter:
+#       b: tuple[int, int] = field(converter=duplicate)
+#   WithGenericClassConverter(("a", "b", "c"), 1)
+#   WithGenericClassConverter(("a", "b", "c"), "foo")  # TODO: should be an error
+#
+# The `field` call gives T and R fresh metavariables. The converter is a
+# generic function value, so it keeps its `forall`, and the solver selects
+# its parameter X. In a dataclass-like class, the field annotation is the
+# expected type of the converter result R, and the `__init__` parameter type
+# is the converter input T. The selection links them: ?T <: X and
+# tuple[X, X] <: ?R <: tuple[int, int], so X and ?T stay below int. Each
+# constructor call puts its `b` argument into ?T. The int argument fits.
+# The str argument cannot fit below int. The core is the converter check,
+# the field annotation, and the str call.
+#
+# Approximations: field `a` and the first constructor argument are omitted,
+# because a tuple display is not an Iterable in this language. The keyword
+# argument `converter=` is positional. The unused `default` parameter is
+# omitted.
+class int;
+class str;
+class NoneType;
+metavar ?T;
+metavar ?R;
+
+assert b_converter: forall X. (X) -> tuple[X, X] <: ((?T) -> ?R) | NoneType;
+assert b_field: ?R <: tuple[int, int];
+assert b_init_int: int <: ?T;
+assert b_init_str: str <: ?T;

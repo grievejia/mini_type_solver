@@ -1,0 +1,8 @@
+class Dog;
+class Cat;
+class Inv[T];
+metavar ?T;
+
+assert dog: Inv[?T] <: Inv[Dog];
+assert redundant: object <: object;
+assert cat: Inv[?T] <: Inv[Cat];

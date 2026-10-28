@@ -1,0 +1,87 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 67,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 28,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 12,
+                    },
+                    name: "number",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 21,
+                            end: 27,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 21,
+                                end: 27,
+                            },
+                            name: "object",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 29,
+                    end: 54,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 35,
+                        end: 38,
+                    },
+                    name: "int",
+                },
+                parameters: None,
+                superclasses: [
+                    SuperclassExpr {
+                        span: Span {
+                            start: 47,
+                            end: 53,
+                        },
+                        name: Ident {
+                            span: Span {
+                                start: 47,
+                                end: 53,
+                            },
+                            name: "number",
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 55,
+                    end: 66,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 63,
+                        end: 65,
+                    },
+                    name: "T",
+                },
+            },
+        ),
+    ],
+}

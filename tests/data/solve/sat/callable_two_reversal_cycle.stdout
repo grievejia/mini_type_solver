@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?T = mu R0. (R0) -> A
+  ?W = mu R0. (R0) -> A

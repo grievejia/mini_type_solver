@@ -1,0 +1,2 @@
+assert forall X. (X) -> X
+    <: (forall Y. (Y) -> Y) -> forall Z. (Z) -> Z;

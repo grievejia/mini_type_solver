@@ -1,0 +1,12 @@
+# verdict: satisfiable
+# Meet of upper bounds: ?V must sit below two unrelated supertypes
+# while its lower bound sits below both. The model assigns
+# ?V = special_number. Both upper obligations accept that selected
+# assignment.
+class number;
+class serializable;
+class special_number extends number, serializable;
+metavar ?V;
+assert low: special_number <: ?V;
+assert u1: ?V <: number;
+assert u2: ?V <: serializable;

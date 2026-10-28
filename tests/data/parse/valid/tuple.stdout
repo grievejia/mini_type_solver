@@ -1,0 +1,251 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 134,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 8,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 7,
+                    },
+                    name: "a",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 9,
+                    end: 17,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 15,
+                        end: 16,
+                    },
+                    name: "b",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 18,
+                    end: 29,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 26,
+                        end: 28,
+                    },
+                    name: "T",
+                },
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 30,
+                    end: 57,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 37,
+                            end: 56,
+                        },
+                        left: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 37,
+                                    end: 44,
+                                },
+                                elements: [],
+                            },
+                        ),
+                        right: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 48,
+                                    end: 56,
+                                },
+                                elements: [
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 54,
+                                                end: 55,
+                                            },
+                                            name: "a",
+                                        },
+                                    ),
+                                ],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 58,
+                    end: 133,
+                },
+                label: Some(
+                    Ident {
+                        span: Span {
+                            start: 65,
+                            end: 71,
+                        },
+                        name: "nested",
+                    },
+                ),
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 73,
+                            end: 132,
+                        },
+                        left: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 73,
+                                    end: 100,
+                                },
+                                elements: [
+                                    Union(
+                                        Nary {
+                                            span: Span {
+                                                start: 79,
+                                                end: 84,
+                                            },
+                                            first: Name(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 79,
+                                                        end: 80,
+                                                    },
+                                                    name: "a",
+                                                },
+                                            ),
+                                            second: (
+                                                Span {
+                                                    start: 81,
+                                                    end: 82,
+                                                },
+                                                Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 83,
+                                                            end: 84,
+                                                        },
+                                                        name: "b",
+                                                    },
+                                                ),
+                                            ),
+                                            rest: [],
+                                        },
+                                    ),
+                                    Tuple(
+                                        TupleTypeExpr {
+                                            span: Span {
+                                                start: 86,
+                                                end: 99,
+                                            },
+                                            elements: [
+                                                Intersection(
+                                                    Nary {
+                                                        span: Span {
+                                                            start: 92,
+                                                            end: 98,
+                                                        },
+                                                        first: MetaName(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 92,
+                                                                    end: 94,
+                                                                },
+                                                                name: "T",
+                                                            },
+                                                        ),
+                                                        second: (
+                                                            Span {
+                                                                start: 95,
+                                                                end: 96,
+                                                            },
+                                                            Name(
+                                                                Ident {
+                                                                    span: Span {
+                                                                        start: 97,
+                                                                        end: 98,
+                                                                    },
+                                                                    name: "a",
+                                                                },
+                                                            ),
+                                                        ),
+                                                        rest: [],
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                ],
+                            },
+                        ),
+                        right: Tuple(
+                            TupleTypeExpr {
+                                span: Span {
+                                    start: 104,
+                                    end: 132,
+                                },
+                                elements: [
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 110,
+                                                end: 116,
+                                            },
+                                            name: "object",
+                                        },
+                                    ),
+                                    Tuple(
+                                        TupleTypeExpr {
+                                            span: Span {
+                                                start: 118,
+                                                end: 131,
+                                            },
+                                            elements: [
+                                                Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 124,
+                                                            end: 130,
+                                                        },
+                                                        name: "object",
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                ],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

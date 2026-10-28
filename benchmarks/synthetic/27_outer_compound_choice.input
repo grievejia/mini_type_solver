@@ -1,0 +1,10 @@
+# verdict: satisfiable
+# Outer compound choice: the first Boolean branch is unsatisfiable because both
+# metavariables must stay below b. The second branch is satisfiable by assigning
+# a to ?U and never to ?T.
+class a;
+class b;
+metavar ?T;
+metavar ?U;
+assert search: ((a <: ?T | ?U) and (?T <: b) and (?U <: b))
+    or ((a <: ?T | ?U) and (?T <: b));

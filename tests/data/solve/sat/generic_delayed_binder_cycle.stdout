@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?G = forall T0. (T0) -> tuple[T0]
+  ?T = mu R0. tuple[R0]

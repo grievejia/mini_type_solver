@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?Exact = Inv[Dog]
+  ?Negative = tuple[(Inv[object]) -> object, (Inv[object]) -> object]

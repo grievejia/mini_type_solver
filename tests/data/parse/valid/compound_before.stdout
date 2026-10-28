@@ -1,0 +1,67 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 24,
+    },
+    decls: [
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 0,
+                    end: 23,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 7,
+                            end: 22,
+                        },
+                        left: Intersection(
+                            Nary {
+                                span: Span {
+                                    start: 7,
+                                    end: 16,
+                                },
+                                first: Name(
+                                    Ident {
+                                        span: Span {
+                                            start: 7,
+                                            end: 10,
+                                        },
+                                        name: "int",
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 11,
+                                        end: 12,
+                                    },
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 13,
+                                                end: 16,
+                                            },
+                                            name: "str",
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                        right: MetaName(
+                            Ident {
+                                span: Span {
+                                    start: 20,
+                                    end: 22,
+                                },
+                                name: "T",
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

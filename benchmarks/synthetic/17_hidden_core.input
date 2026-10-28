@@ -1,0 +1,20 @@
+# verdict: unsatisfiable
+# Hidden core: eight harmless filler assertions plus two bounds that
+# conflict with each other. The core is [anchor, clash]. Core shrinking
+# must discard the eight fillers and keep only the two responsible
+# units.
+class dog;
+class cat;
+class bird;
+class fish;
+metavar ?T;
+assert fill0: dog <: dog;
+assert fill1: bird <: bird;
+assert fill2: fish <: fish;
+assert fill3: dog <: object;
+assert fill4: bird <: object;
+assert fill5: never <: dog;
+assert fill6: cat <: cat;
+assert fill7: fish <: object;
+assert anchor: dog <: ?T;
+assert clash: ?T <: cat;

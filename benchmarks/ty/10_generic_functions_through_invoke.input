@@ -1,0 +1,83 @@
+# verdict: satisfiable
+# Source: ty mdtest generics/pep695/functions.md:1888
+#   Generic functions: PEP 695 syntax / Passing generic functions to generic
+#   functions
+# ty: the identity and covariant calls give the asserted types. For the
+# contravariant and invariant calls, ty reveals Unknown today, and TODOs give
+# the intended types (int, Contravariant[int], int, Invariant[int]). These
+# constraints admit the intended types. In `head_contravariant` the value
+# bounds T only from above, so T = never also fits there.
+#
+#   def invoke[A, B](fn: Callable[[A], B], value: A) -> B
+#   def identity[T](x: T) -> T
+#   def head_X[T](xs: X[T]) -> T
+#   def lift_X[T](xs: T) -> X[T]      for X in Covariant, Contravariant, Invariant
+#
+# Each `invoke` call gives A and B fresh metavariables. The first argument is
+# a generic function value, so it keeps its `forall`, and the solver selects
+# its T against (?A) -> ?B. The second argument is a lower bound on ?A. The
+# revealed type is an upper bound on ?B. Thus the selection is limited from
+# two sides: through ?A by the value, and through ?B by the expected result.
+# The variance of the container decides the direction of each limit. For
+# `head_contravariant`, the value gives T an upper bound int. For
+# `lift_invariant`, the expected result makes T equal int, and the literal
+# value must still fit T.
+#
+# Variance: ty infers it from the members. Covariant has a getter, so it is
+# covariant. Contravariant has a method that takes T, so it is contravariant.
+# Invariant has a mutable attribute, so it is invariant.
+# Approximation: Literal[1] is a subclass of int.
+class int;
+class Literal1 extends int;
+class Covariant[+T];
+class Contravariant[-T];
+class Invariant[T];
+metavar ?id_A;
+metavar ?id_B;
+metavar ?hc_A;
+metavar ?hc_B;
+metavar ?lc_A;
+metavar ?lc_B;
+metavar ?hn_A;
+metavar ?hn_B;
+metavar ?ln_A;
+metavar ?ln_B;
+metavar ?hi_A;
+metavar ?hi_B;
+metavar ?li_A;
+metavar ?li_B;
+
+# invoke(identity, 1)  -- Literal[1]
+assert id_fn: forall T. (T) -> T <: (?id_A) -> ?id_B;
+assert id_value: Literal1 <: ?id_A;
+assert id_result: ?id_B <: Literal1;
+
+# invoke(head_covariant, Covariant[int]())  -- int
+assert hc_fn: forall T. (Covariant[T]) -> T <: (?hc_A) -> ?hc_B;
+assert hc_value: Covariant[int] <: ?hc_A;
+assert hc_result: ?hc_B <: int;
+
+# invoke(lift_covariant, 1)  -- Covariant[Literal[1]]
+assert lc_fn: forall T. (T) -> Covariant[T] <: (?lc_A) -> ?lc_B;
+assert lc_value: Literal1 <: ?lc_A;
+assert lc_result: ?lc_B <: Covariant[Literal1];
+
+# invoke(head_contravariant, Contravariant[int]())  -- TODO: int
+assert hn_fn: forall T. (Contravariant[T]) -> T <: (?hn_A) -> ?hn_B;
+assert hn_value: Contravariant[int] <: ?hn_A;
+assert hn_result: ?hn_B <: int;
+
+# invoke(lift_contravariant, 1)  -- TODO: Contravariant[int]
+assert ln_fn: forall T. (T) -> Contravariant[T] <: (?ln_A) -> ?ln_B;
+assert ln_value: Literal1 <: ?ln_A;
+assert ln_result: ?ln_B <: Contravariant[int];
+
+# invoke(head_invariant, Invariant[int]())  -- TODO: int
+assert hi_fn: forall T. (Invariant[T]) -> T <: (?hi_A) -> ?hi_B;
+assert hi_value: Invariant[int] <: ?hi_A;
+assert hi_result: ?hi_B <: int;
+
+# invoke(lift_invariant, 1)  -- TODO: Invariant[int]
+assert li_fn: forall T. (T) -> Invariant[T] <: (?li_A) -> ?li_B;
+assert li_value: Literal1 <: ?li_A;
+assert li_result: ?li_B <: Invariant[int];

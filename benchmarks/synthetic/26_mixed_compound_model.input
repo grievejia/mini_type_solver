@@ -1,0 +1,9 @@
+# verdict: satisfiable
+# Mixed compound model: the accepted value for ?T has one intersection arm and
+# one single-class arm. Model extraction produces a & b | c.
+class a;
+class b;
+class c;
+metavar ?T;
+assert lower: (a & b) | c <: ?T;
+assert upper: ?T <: (a & b) | c;

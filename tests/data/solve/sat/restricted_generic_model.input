@@ -1,0 +1,7 @@
+class A;
+class B;
+metavar ?Upper;
+metavar ?Exact;
+
+assert forall X <: A. (X) -> X <: ?Upper;
+assert forall X in {A, B}. (X) -> X <: ?Exact;

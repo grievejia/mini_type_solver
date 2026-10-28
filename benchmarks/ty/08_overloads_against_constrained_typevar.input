@@ -1,0 +1,74 @@
+# verdict: unsatisfiable
+# Source: ty mdtest generics/pep695/functions.md:1406
+#   Generic functions: PEP 695 syntax / Conflicting overloads against a
+#   constrained typevar
+# ty: `f(source, 1)` is int and `f(source, b"a")` is bytes. `f(source, value)`
+# with `value: str` is an error. `g(source_pair, 1, 1)` is an error for U and
+# for V.
+#
+#   def f[T: (int, str, bytes)](callback: Callable[..., T], value: T) -> T
+#   source: overload of (int) -> int and (bytes) -> bytes
+#   def g[U: (int, str), V: (int, str)](
+#       callback: Callable[..., tuple[U, V]], x: U, y: V) -> None
+#   source_pair: overload of (int) -> tuple[int, str] and (str) -> tuple[str, int]
+#
+# Each call gives each type variable a fresh metavariable. A constrained type
+# variable must equal one constraint, so that choice is an `or` of
+# equalities (`*_choice`). The overloaded argument is an `or` over its
+# signatures. The chosen signature's return type flows into the type
+# variable, and the other arguments also flow into it. Two choices interact:
+# the signature fixes one lower bound, the other argument adds another, and
+# the result must still equal one constraint. For `g`, the int signature puts
+# str into V while `y` puts int into V, and the str signature puts str into U
+# while `x` puts int into U. No constraint holds both, so both fail. This is
+# the constrained form of Pyrefly candidate 09, which is satisfiable without
+# constraints.
+#
+# Overload order: ty picks the signature that agrees with the other
+# arguments (int for `f(source, 1)`, bytes for `f(source, b"a")`), not the
+# first one. An `or` gives the same result.
+# Approximations: `Callable[..., R]` is `(never) -> R`. Every one-parameter
+# callable has a parameter type above `never`, so this keeps the meaning for
+# the unary overloads here. The literals 1 and b"a" are int and bytes.
+class int;
+class str;
+class bytes;
+metavar ?int_T;
+metavar ?bytes_T;
+metavar ?str_T;
+metavar ?g_U;
+metavar ?g_V;
+
+# reveal_type(f(source, 1))  -- int
+assert int_choice: (?int_T <: int and int <: ?int_T)
+    or (?int_T <: str and str <: ?int_T)
+    or (?int_T <: bytes and bytes <: ?int_T);
+assert int_callback: ((int) -> int <: (never) -> ?int_T)
+    or ((bytes) -> bytes <: (never) -> ?int_T);
+assert int_value: int <: ?int_T;
+assert int_result: ?int_T <: int;
+
+# reveal_type(f(source, b"a"))  -- bytes
+assert bytes_choice: (?bytes_T <: int and int <: ?bytes_T)
+    or (?bytes_T <: str and str <: ?bytes_T)
+    or (?bytes_T <: bytes and bytes <: ?bytes_T);
+assert bytes_callback: ((int) -> int <: (never) -> ?bytes_T)
+    or ((bytes) -> bytes <: (never) -> ?bytes_T);
+assert bytes_value: bytes <: ?bytes_T;
+assert bytes_result: ?bytes_T <: bytes;
+
+# f(source, value) with value: str  -- error
+assert str_choice: (?str_T <: int and int <: ?str_T)
+    or (?str_T <: str and str <: ?str_T)
+    or (?str_T <: bytes and bytes <: ?str_T);
+assert str_callback: ((int) -> int <: (never) -> ?str_T)
+    or ((bytes) -> bytes <: (never) -> ?str_T);
+assert str_value: str <: ?str_T;
+
+# g(source_pair, 1, 1)  -- error for U and for V
+assert g_U_choice: (?g_U <: int and int <: ?g_U) or (?g_U <: str and str <: ?g_U);
+assert g_V_choice: (?g_V <: int and int <: ?g_V) or (?g_V <: str and str <: ?g_V);
+assert g_callback: ((int) -> tuple[int, str] <: (never) -> tuple[?g_U, ?g_V])
+    or ((str) -> tuple[str, int] <: (never) -> tuple[?g_U, ?g_V]);
+assert g_x: int <: ?g_U;
+assert g_y: int <: ?g_V;

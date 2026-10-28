@@ -1,0 +1,3 @@
+# verdict: satisfiable
+metavar ?T;
+assert tuple[?T] <: ?T;

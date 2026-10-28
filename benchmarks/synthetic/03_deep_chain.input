@@ -1,0 +1,30 @@
+# verdict: satisfiable
+# Deep linear hierarchy (16 classes) with a short metavariable chain
+# anchored at both ends. Every ?Ti is c15 in the model.
+# Stresses C3 linearization depth, transitive oracle queries, and
+# assignment growth across metavariable edges.
+class c0;
+class c1 extends c0;
+class c2 extends c1;
+class c3 extends c2;
+class c4 extends c3;
+class c5 extends c4;
+class c6 extends c5;
+class c7 extends c6;
+class c8 extends c7;
+class c9 extends c8;
+class c10 extends c9;
+class c11 extends c10;
+class c12 extends c11;
+class c13 extends c12;
+class c14 extends c13;
+class c15 extends c14;
+metavar ?T0;
+metavar ?T1;
+metavar ?T2;
+metavar ?T3;
+assert anchor_low: c15 <: ?T0;
+assert e0: ?T0 <: ?T1;
+assert e1: ?T1 <: ?T2;
+assert e2: ?T2 <: ?T3;
+assert anchor_high: ?T3 <: c0;

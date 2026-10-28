@@ -1,0 +1,6 @@
+class A;
+class B extends A;
+metavar ?T;
+assert empty: tuple[] <: object;
+assert nested: tuple[tuple[B], B] <: tuple[tuple[A], A];
+assert bound: tuple[B] <: ?T;

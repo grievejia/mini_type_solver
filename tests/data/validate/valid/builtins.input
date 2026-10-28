@@ -1,0 +1,5 @@
+class a extends object;
+class b extends a;
+metavar ?object;
+assert same: a <: b;
+assert never <: b;

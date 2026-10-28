@@ -1,0 +1,12 @@
+# Rust build output
+/target/
+**/*.rs.bk
+
+# Editor / OS noise
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Note: Cargo.lock is intentionally committed (binary prototype;
+# design pins the SAT solver version in Cargo.lock).

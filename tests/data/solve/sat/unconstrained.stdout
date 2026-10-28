@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?T = a
+  ?U = unconstrained

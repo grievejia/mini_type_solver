@@ -1,0 +1,10 @@
+class X;
+
+assert forall X, Y. (X, Y) -> X <: forall Z. (Z) -> Z;
+assert forall Y, X. (X, Y) -> X <: object;
+assert tuple[forall X. (X) -> X] <: tuple[forall Y. (Y) -> Y];
+assert (forall X. (X) -> X) | A <: object;
+assert (forall X. (X) -> X) & A <: object;
+assert (forall X. (X) -> X) -> forall Y. (Y) -> Y <: object;
+assert forall X. (forall Y. (Y) -> X) -> X <: object;
+assert forall X <: A, Y in {A, tuple[B]}. (X, Y) -> X <: object;

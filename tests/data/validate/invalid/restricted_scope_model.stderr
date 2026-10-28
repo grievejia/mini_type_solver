@@ -1,0 +1,1 @@
+<input>:5:37: generic parameter restriction cannot contain type parameter `X`

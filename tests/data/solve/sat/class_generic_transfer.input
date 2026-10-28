@@ -1,0 +1,5 @@
+class Inv[T];
+class Dog;
+metavar ?T;
+assert forall X. (X) -> object <: (Inv[?T]) -> object;
+assert (Dog <: ?T) or (forall Z. (Z) -> Z <: ?T);

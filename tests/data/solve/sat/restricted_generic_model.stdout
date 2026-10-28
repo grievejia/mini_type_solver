@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?Upper = forall T0. (T0 & A) -> T0 & A
+  ?Exact = ((A) -> A) & ((B) -> B)

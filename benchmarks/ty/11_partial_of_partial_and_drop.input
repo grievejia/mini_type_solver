@@ -1,0 +1,51 @@
+# verdict: satisfiable
+# Source: ty mdtest generics/pep695/callables.md:1291
+#   Generic callables: PEP 695 syntax / Multiple occurrences of a higher-order
+#   generic callable
+# ty: today both reveals are Unknown. The TODO says
+# `partial(partial, drop)(1)("x")` should be Literal["x"] and
+# `partial(partial, drop)("x")(1)` should be Literal[1]. These constraints
+# give the TODO results.
+#
+#   def partial[A, B, C](c: Callable[[A, B], C], a: A) -> Callable[[B], C]
+#   def drop[X, Y](x: X, y: Y) -> Y
+#
+# Each outer `partial` call gives A, B, and C fresh metavariables. Both
+# arguments are generic function values, so they keep their `forall`. The
+# argument `partial` must fit (?A, ?B) -> ?C, so the solver selects the inner
+# A', B', and C'. That check makes ?A an upper bound for (A', B') -> C'. The
+# argument `drop` is a lower bound on ?A, so ?A holds a generic callable, and
+# the solver must select drop's X and Y against (A', B') -> C'. The outer
+# result is (?B) -> ?C. The first later call puts its argument into ?B. ?C
+# is a callable, and the second later call checks it against
+# (argument) -> result. The value reaches the result through B' <: Y <: C'.
+# The asserted type is the TODO result.
+#
+# Variance: none involved. Approximations: the literal types are subclasses
+# of int and str.
+class int;
+class str;
+class Literal1 extends int;
+class LiteralX extends str;
+metavar ?A1;
+metavar ?B1;
+metavar ?C1;
+metavar ?R1;
+metavar ?A2;
+metavar ?B2;
+metavar ?C2;
+metavar ?R2;
+
+# reveal_type(partial(partial, drop)(1)("x"))  -- TODO: Literal["x"]
+assert first_c: forall A, B, C. ((A, B) -> C, A) -> (B) -> C <: (?A1, ?B1) -> ?C1;
+assert first_a: forall X, Y. (X, Y) -> Y <: ?A1;
+assert first_call1: Literal1 <: ?B1;
+assert first_call2: ?C1 <: (LiteralX) -> ?R1;
+assert first_result: ?R1 <: LiteralX;
+
+# reveal_type(partial(partial, drop)("x")(1))  -- TODO: Literal[1]
+assert second_c: forall A, B, C. ((A, B) -> C, A) -> (B) -> C <: (?A2, ?B2) -> ?C2;
+assert second_a: forall X, Y. (X, Y) -> Y <: ?A2;
+assert second_call1: LiteralX <: ?B2;
+assert second_call2: ?C2 <: (Literal1) -> ?R2;
+assert second_result: ?R2 <: Literal1;

@@ -1,0 +1,39 @@
+# verdict: unsatisfiable
+# Source: pyrefly/lib/test/generic_restrictions.rs:1492
+#   test_bound_violation_in_union_member
+# Pyrefly: `func1(left, right)` is accepted. `func2(left, right)` is an
+# error for each argument.
+#
+#   class DataFrame:
+#       def __iter__(self) -> Iterator[Series]
+#   FrameType = TypeVar("FrameType", bound=DataFrame)
+#   def func1(*a: FrameType | Iterable[FrameType]) -> None
+#   def func2(*a: Iterable[FrameType] | None) -> None
+#   left, right: DataFrame
+#
+# Each call gives FrameType a fresh metavariable, and its bound is one
+# assertion. Each argument is one assertion against the parameter type. A
+# DataFrame is iterable over Series, so it fits Iterable[F] only if Series
+# fits F. The bound DataFrame rejects that. For func1, the solver must use
+# the bare F arm, with F = DataFrame. For func2, no arm of the union is left.
+# The core is one func2 argument and the func2 bound.
+#
+# Approximations: DataFrame is iterable through `__iter__`. A nominal base
+# class Iterable[Series] models it. Each argument of `*a` is checked
+# against the declared element type.
+class Series;
+class Iterable[+T];
+class DataFrame extends Iterable[Series];
+class NoneType;
+metavar ?F1;
+metavar ?F2;
+
+# func1(left, right)
+assert func1_left: DataFrame <: ?F1 | Iterable[?F1];
+assert func1_right: DataFrame <: ?F1 | Iterable[?F1];
+assert func1_bound: ?F1 <: DataFrame;
+
+# func2(left, right)  -- error
+assert func2_left: DataFrame <: Iterable[?F2] | NoneType;
+assert func2_right: DataFrame <: Iterable[?F2] | NoneType;
+assert func2_bound: ?F2 <: DataFrame;

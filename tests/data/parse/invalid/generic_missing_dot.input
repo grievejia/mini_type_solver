@@ -1,0 +1,1 @@
+assert forall X (X) -> X <: object;

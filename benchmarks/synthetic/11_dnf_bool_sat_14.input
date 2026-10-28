@@ -1,0 +1,37 @@
+# verdict: satisfiable
+# Boolean expansion with a shared conflict: 14 syntactic choices reuse
+# the same false primitive atom and each has its own true reflexive
+# alternative. Only the all-reflexive combination works, so DNF
+# materializes 16384 conjunctions. A SAT engine can learn once that the
+# shared false atom cannot be active. No metavariable assignment repair is
+# involved.
+class a;
+class b;
+class t0;
+class t1;
+class t2;
+class t3;
+class t4;
+class t5;
+class t6;
+class t7;
+class t8;
+class t9;
+class t10;
+class t11;
+class t12;
+class t13;
+assert c00: (a <: b) or (t0 <: t0);
+assert c01: (a <: b) or (t1 <: t1);
+assert c02: (a <: b) or (t2 <: t2);
+assert c03: (a <: b) or (t3 <: t3);
+assert c04: (a <: b) or (t4 <: t4);
+assert c05: (a <: b) or (t5 <: t5);
+assert c06: (a <: b) or (t6 <: t6);
+assert c07: (a <: b) or (t7 <: t7);
+assert c08: (a <: b) or (t8 <: t8);
+assert c09: (a <: b) or (t9 <: t9);
+assert c10: (a <: b) or (t10 <: t10);
+assert c11: (a <: b) or (t11 <: t11);
+assert c12: (a <: b) or (t12 <: t12);
+assert c13: (a <: b) or (t13 <: t13);

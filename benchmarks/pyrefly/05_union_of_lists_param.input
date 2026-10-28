@@ -1,0 +1,20 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/generic_basic.rs:570
+#   test_nested_typevar
+# Pyrefly: `f([None], [0])` has type int.
+#
+#   def f[T](x: list[T] | list[None], y: list[T]) -> T
+#
+# The call gives T a fresh metavariable. The first argument must fit one arm
+# of `list[T] | list[None]`. The list[T] arm makes T equal None, but the
+# second argument makes T equal int through the invariant list. Only the
+# list[None] arm works.
+# Approximation: each list display has its own type (list[None], list[int]).
+class int;
+class NoneType;
+class list[T];
+metavar ?T;
+
+assert x: list[NoneType] <: list[?T] | list[NoneType];
+assert y: list[int] <: list[?T];
+assert result: ?T <: int;

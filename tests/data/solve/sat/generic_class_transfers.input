@@ -1,0 +1,24 @@
+class Dog;
+class Inv[T];
+class Co[+T];
+class Con[-T];
+metavar ?Exact;
+metavar ?Negative;
+metavar ?Universal;
+metavar ?Covariant;
+metavar ?Contravariant;
+metavar ?Retained;
+metavar ?T;
+
+assert forall X. (X) -> Inv[X] <: (Dog) -> ?Exact;
+assert forall X. (X) -> object <: (Inv[?T]) -> object;
+assert Dog <: ?T;
+assert ?T <: Dog;
+assert forall X. (X) -> (Inv[X]) -> object <: forall Y. (Y) -> ?Negative;
+assert ?Negative <: (Inv[object]) -> object;
+assert (?Universal) -> object <: forall Y. ((Inv[Y]) -> object) -> object;
+assert forall X. (X) -> X <: forall Y. (Co[Y]) -> ?Covariant;
+assert ?Covariant <: Co[object];
+assert forall X. (X) -> X <: forall Y. (Con[Y]) -> ?Contravariant;
+assert forall X. (X) -> X <: ?Retained;
+assert ?Retained <: forall Y. (Inv[Y]) -> Inv[Y];

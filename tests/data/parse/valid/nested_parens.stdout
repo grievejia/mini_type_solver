@@ -1,0 +1,190 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 52,
+    },
+    decls: [
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 0,
+                    end: 51,
+                },
+                label: None,
+                formula: Paren(
+                    Paren {
+                        span: Span {
+                            start: 7,
+                            end: 50,
+                        },
+                        inner: And(
+                            Nary {
+                                span: Span {
+                                    start: 8,
+                                    end: 49,
+                                },
+                                first: Paren(
+                                    Paren {
+                                        span: Span {
+                                            start: 8,
+                                            end: 26,
+                                        },
+                                        inner: Or(
+                                            Nary {
+                                                span: Span {
+                                                    start: 9,
+                                                    end: 25,
+                                                },
+                                                first: Subtype(
+                                                    Subtype {
+                                                        span: Span {
+                                                            start: 9,
+                                                            end: 15,
+                                                        },
+                                                        left: Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 9,
+                                                                    end: 10,
+                                                                },
+                                                                name: "a",
+                                                            },
+                                                        ),
+                                                        right: Name(
+                                                            Ident {
+                                                                span: Span {
+                                                                    start: 14,
+                                                                    end: 15,
+                                                                },
+                                                                name: "b",
+                                                            },
+                                                        ),
+                                                    },
+                                                ),
+                                                second: (
+                                                    Span {
+                                                        start: 16,
+                                                        end: 18,
+                                                    },
+                                                    Subtype(
+                                                        Subtype {
+                                                            span: Span {
+                                                                start: 19,
+                                                                end: 25,
+                                                            },
+                                                            left: Name(
+                                                                Ident {
+                                                                    span: Span {
+                                                                        start: 19,
+                                                                        end: 20,
+                                                                    },
+                                                                    name: "c",
+                                                                },
+                                                            ),
+                                                            right: Name(
+                                                                Ident {
+                                                                    span: Span {
+                                                                        start: 24,
+                                                                        end: 25,
+                                                                    },
+                                                                    name: "d",
+                                                                },
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                rest: [],
+                                            },
+                                        ),
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 27,
+                                        end: 30,
+                                    },
+                                    Paren(
+                                        Paren {
+                                            span: Span {
+                                                start: 31,
+                                                end: 49,
+                                            },
+                                            inner: Or(
+                                                Nary {
+                                                    span: Span {
+                                                        start: 32,
+                                                        end: 48,
+                                                    },
+                                                    first: Subtype(
+                                                        Subtype {
+                                                            span: Span {
+                                                                start: 32,
+                                                                end: 38,
+                                                            },
+                                                            left: Name(
+                                                                Ident {
+                                                                    span: Span {
+                                                                        start: 32,
+                                                                        end: 33,
+                                                                    },
+                                                                    name: "e",
+                                                                },
+                                                            ),
+                                                            right: Name(
+                                                                Ident {
+                                                                    span: Span {
+                                                                        start: 37,
+                                                                        end: 38,
+                                                                    },
+                                                                    name: "f",
+                                                                },
+                                                            ),
+                                                        },
+                                                    ),
+                                                    second: (
+                                                        Span {
+                                                            start: 39,
+                                                            end: 41,
+                                                        },
+                                                        Subtype(
+                                                            Subtype {
+                                                                span: Span {
+                                                                    start: 42,
+                                                                    end: 48,
+                                                                },
+                                                                left: Name(
+                                                                    Ident {
+                                                                        span: Span {
+                                                                            start: 42,
+                                                                            end: 43,
+                                                                        },
+                                                                        name: "g",
+                                                                    },
+                                                                ),
+                                                                right: Name(
+                                                                    Ident {
+                                                                        span: Span {
+                                                                            start: 47,
+                                                                            end: 48,
+                                                                        },
+                                                                        name: "h",
+                                                                    },
+                                                                ),
+                                                            },
+                                                        ),
+                                                    ),
+                                                    rest: [],
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

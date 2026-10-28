@@ -1,0 +1,3 @@
+class a;
+metavar ?T;
+assert a <: ?T;

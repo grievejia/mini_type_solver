@@ -1,0 +1,5 @@
+class number;
+class str;
+metavar ?T;
+assert require_text: str <: ?T;
+assert require_number: ?T <: number;

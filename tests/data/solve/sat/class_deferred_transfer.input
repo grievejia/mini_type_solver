@@ -1,0 +1,6 @@
+class Parent[+T];
+class Inv[T] extends Parent[T];
+class Dog;
+metavar ?M;
+assert forall X. (X) -> X <: forall Y. (forall Z. (Z) -> Inv[Y]) -> ?M;
+assert ?M <: (Dog) -> Parent[object];

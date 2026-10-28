@@ -1,0 +1,4 @@
+class A;
+class B;
+metavar ?T;
+assert mixed: tuple[(A) -> B, (tuple[A]) -> B] <: ?T;

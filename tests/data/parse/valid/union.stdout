@@ -1,0 +1,148 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 56,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 8,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 7,
+                    },
+                    name: "a",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 9,
+                    end: 17,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 15,
+                        end: 16,
+                    },
+                    name: "b",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+        Metavar(
+            MetavarDecl {
+                span: Span {
+                    start: 18,
+                    end: 29,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 26,
+                        end: 28,
+                    },
+                    name: "T",
+                },
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 30,
+                    end: 55,
+                },
+                label: None,
+                formula: Subtype(
+                    Subtype {
+                        span: Span {
+                            start: 37,
+                            end: 54,
+                        },
+                        left: Paren(
+                            ParenTypeExpr {
+                                span: Span {
+                                    start: 37,
+                                    end: 45,
+                                },
+                                inner: Union(
+                                    Nary {
+                                        span: Span {
+                                            start: 38,
+                                            end: 44,
+                                        },
+                                        first: Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 38,
+                                                    end: 39,
+                                                },
+                                                name: "a",
+                                            },
+                                        ),
+                                        second: (
+                                            Span {
+                                                start: 40,
+                                                end: 41,
+                                            },
+                                            MetaName(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 42,
+                                                        end: 44,
+                                                    },
+                                                    name: "T",
+                                                },
+                                            ),
+                                        ),
+                                        rest: [],
+                                    },
+                                ),
+                            },
+                        ),
+                        right: Union(
+                            Nary {
+                                span: Span {
+                                    start: 49,
+                                    end: 54,
+                                },
+                                first: Name(
+                                    Ident {
+                                        span: Span {
+                                            start: 49,
+                                            end: 50,
+                                        },
+                                        name: "a",
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 51,
+                                        end: 52,
+                                    },
+                                    Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 53,
+                                                end: 54,
+                                            },
+                                            name: "b",
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                    },
+                ),
+            },
+        ),
+    ],
+}

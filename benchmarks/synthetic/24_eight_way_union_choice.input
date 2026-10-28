@@ -1,0 +1,29 @@
+# verdict: satisfiable
+# Eight-way union choice: assigning a to any of the first seven metavariables
+# violates its upper bound. Assigning a to the eighth metavariable satisfies
+# every constraint.
+class a;
+class bad0;
+class bad1;
+class bad2;
+class bad3;
+class bad4;
+class bad5;
+class bad6;
+metavar ?T0;
+metavar ?T1;
+metavar ?T2;
+metavar ?T3;
+metavar ?T4;
+metavar ?T5;
+metavar ?T6;
+metavar ?T7;
+assert choose: a <: ?T0 | ?T1 | ?T2 | ?T3 | ?T4 | ?T5 | ?T6 | ?T7;
+assert reject0: ?T0 <: bad0;
+assert reject1: ?T1 <: bad1;
+assert reject2: ?T2 <: bad2;
+assert reject3: ?T3 <: bad3;
+assert reject4: ?T4 <: bad4;
+assert reject5: ?T5 <: bad5;
+assert reject6: ?T6 <: bad6;
+assert accept7: ?T7 <: a;

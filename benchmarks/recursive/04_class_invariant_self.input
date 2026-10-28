@@ -1,0 +1,4 @@
+# verdict: satisfiable
+class Inv[T];
+metavar ?T;
+assert Inv[?T] <: ?T;

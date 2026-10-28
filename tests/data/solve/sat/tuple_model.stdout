@@ -1,0 +1,4 @@
+satisfiable
+model:
+  ?U = B | C
+  ?T = tuple[B | C, B | C]

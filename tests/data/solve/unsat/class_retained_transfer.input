@@ -1,0 +1,5 @@
+class Inv[T];
+metavar ?M;
+assert (?M) -> object
+    <: forall Y. (forall Z. (Inv[Z & Y]) -> Inv[Z]) -> object;
+assert ?M <: (Inv[never]) -> Inv[never];

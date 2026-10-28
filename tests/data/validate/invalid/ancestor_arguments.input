@@ -1,0 +1,6 @@
+class A;
+class B;
+class Root[T];
+class L extends Root[tuple[B | A]];
+class R extends Root[tuple[A & B]];
+class Join extends L, R;

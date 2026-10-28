@@ -1,0 +1,50 @@
+# verdict: unsatisfiable
+# Source: ty mdtest generics/legacy/functions.md:2888
+#   Generic functions: Legacy syntax / Inferring typevars in intersections
+#   (actual type position, multiple positive types)
+# ty: the first three calls give Sub1 | Sub2, Sub1, and Sub1 | Sub2. The last
+# call is an error.
+#
+#   T = TypeVar("T", bound=Base)
+#   def first(x: Sequence[T]) -> T
+#   called with Intersection[Sequence[...], Sequence[...], ...]
+#
+# Each call gives T a fresh metavariable, and its bound is one assertion. The
+# argument is an intersection, so one factor that fits Sequence[?T] is
+# enough. The bound decides which factors can be used: a Sequence of an
+# unrelated class would put that class into T. The asserted type is an upper
+# bound. With one valid factor, the solver must pick that factor. With no
+# valid factor, the call fails.
+#
+# ty unions the element types of every valid factor. One factor is enough
+# for the subtype relation, so the asserted unions are upper bounds here.
+# Variance: Sequence is covariant.
+class Base;
+class Sub1 extends Base;
+class Sub2 extends Base;
+class Unrelated1;
+class Unrelated2;
+class Sequence[+T];
+metavar ?both;
+metavar ?mixed;
+metavar ?three;
+metavar ?bad;
+
+# first(Intersection[Sequence[Sub1], Sequence[Sub2]])  -- Sub1 | Sub2
+assert both_arg: Sequence[Sub1] & Sequence[Sub2] <: Sequence[?both];
+assert both_bound: ?both <: Base;
+assert both_result: ?both <: Sub1 | Sub2;
+
+# first(Intersection[Sequence[Sub1], Sequence[Unrelated1]])  -- Sub1
+assert mixed_arg: Sequence[Sub1] & Sequence[Unrelated1] <: Sequence[?mixed];
+assert mixed_bound: ?mixed <: Base;
+assert mixed_result: ?mixed <: Sub1;
+
+# first(Intersection[Sequence[Sub1], Sequence[Sub2], Sequence[Unrelated1]])  -- Sub1 | Sub2
+assert three_arg: Sequence[Sub1] & Sequence[Sub2] & Sequence[Unrelated1] <: Sequence[?three];
+assert three_bound: ?three <: Base;
+assert three_result: ?three <: Sub1 | Sub2;
+
+# first(Intersection[Sequence[Unrelated1], Sequence[Unrelated2]])  -- error
+assert bad_arg: Sequence[Unrelated1] & Sequence[Unrelated2] <: Sequence[?bad];
+assert bad_bound: ?bad <: Base;

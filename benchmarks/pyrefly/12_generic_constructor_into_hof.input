@@ -1,0 +1,28 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/constructors.rs:1030
+#   test_init_to_callable_generics
+# Pyrefly: `takes_callable(C, 42)` has type C[int], and
+# `takes_callable(C, "hello")` has type C[str].
+#
+#   class C(Generic[T]):
+#       def __init__[V](self: C[V], x: V) -> None
+#   def takes_callable[V](x: Callable[[V], C[V]], y: V) -> C[V]
+#
+# The class C is a generic callable value, forall W. (W) -> C[W]. Each call
+# gives the V of `takes_callable` a fresh metavariable. The solver must
+# select W so that the constructor fits (?V) -> C[?V]. C is invariant, so W
+# must equal ?V. The second argument gives ?V a lower bound, and
+# `assert_type` is an upper bound on the result.
+class int;
+class str;
+class C[T];
+metavar ?V1;
+metavar ?V2;
+
+assert int_callback: forall W. (W) -> C[W] <: (?V1) -> C[?V1];
+assert int_y: int <: ?V1;
+assert int_result: C[?V1] <: C[int];
+
+assert str_callback: forall W. (W) -> C[W] <: (?V2) -> C[?V2];
+assert str_y: str <: ?V2;
+assert str_result: C[?V2] <: C[str];

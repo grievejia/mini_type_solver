@@ -1,0 +1,6 @@
+class zebra;
+class apple;
+metavar ?T;
+assert zebra <: ?T;
+assert apple <: ?T;
+assert ?T <: zebra | apple;

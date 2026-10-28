@@ -1,0 +1,27 @@
+# verdict: satisfiable
+# Intersection of unions: ten independent binary unions are intersected. The
+# lower type has 1,024 incomparable class combinations. Every combination
+# satisfies the upper union, and no metavariable model is produced.
+class a0;
+class b0;
+class a1;
+class b1;
+class a2;
+class b2;
+class a3;
+class b3;
+class a4;
+class b4;
+class a5;
+class b5;
+class a6;
+class b6;
+class a7;
+class b7;
+class a8;
+class b8;
+class a9;
+class b9;
+assert product: (a0 | b0) & (a1 | b1) & (a2 | b2) & (a3 | b3)
+    & (a4 | b4) & (a5 | b5) & (a6 | b6) & (a7 | b7)
+    & (a8 | b8) & (a9 | b9) <: a0 | b0;

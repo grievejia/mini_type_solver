@@ -1,0 +1,6 @@
+class Seq[+T];
+class S extends Seq[S];
+metavar ?X;
+assert S <: ?X;
+assert ?X <: Seq[?X];
+assert Seq[?X] <: ?X;

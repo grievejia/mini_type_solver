@@ -1,0 +1,5 @@
+satisfiable
+model:
+  ?Inner = never
+  ?Active = tuple[never]
+  ?Unselected = unconstrained

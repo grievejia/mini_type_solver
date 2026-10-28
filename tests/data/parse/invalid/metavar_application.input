@@ -1,0 +1,1 @@
+assert ?M[T] <: object;

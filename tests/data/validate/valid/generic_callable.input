@@ -1,0 +1,13 @@
+class A;
+class B;
+class X;
+metavar ?T;
+
+assert forall X, Y. (X, Y) -> X <: object;
+assert forall X. (forall Y. (Y) -> X) -> X <: object;
+assert forall X. (X) -> ?T <: object;
+assert (?T) -> ?T <: forall X. (tuple[X]) -> X;
+assert forall X <: A. (X) -> X <: object;
+assert forall X in {A, B}. (X) -> X <: object;
+assert forall X <: A, Y in {A, B}. (X, Y) -> X <: object;
+assert forall X in {never}. (forall Y. (Y & X) -> A) -> A <: object;

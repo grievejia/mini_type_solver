@@ -1,0 +1,3 @@
+class Inv[T];
+assert forall X. (X) -> object
+    <: ((forall T. (Inv[T]) -> T) -> object) -> object;

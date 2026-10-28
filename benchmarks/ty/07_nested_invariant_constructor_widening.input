@@ -1,0 +1,38 @@
+# verdict: satisfiable
+# Source: ty mdtest typed_dict.md:4498
+#   `TypedDict` / Generic `TypedDict` / Constructor inference from nested values
+# ty: the intended type of `Outer(inner=Inner(value=1), marker="x")` is
+# Outer[int | str] (TODO). ty currently reveals Outer[Unknown].
+#
+#   class Inner[T](TypedDict):
+#       value: T
+#   class Outer[T](TypedDict):
+#       inner: Inner[T]
+#       marker: T
+#   Outer(inner=Inner(value=1), marker="x")
+#
+# Each constructor call gives its T a fresh metavariable (?I inner, ?O
+# outer). Each keyword argument is one assertion against its field type.
+# The inner result Inner[?I] must fit the outer field Inner[?O]. T is
+# invariant, so ?I must equal ?O. ?I holds int from the inner call, and ?O
+# holds str from the outer call, so both must equal int | str. A solver that
+# fixes ?I = int at the inner call cannot satisfy the outer call. The
+# intended type is an upper bound on the outer result.
+#
+# Variance: a TypedDict field is mutable, so ty treats T as invariant in
+# both classes.
+# Approximations: each TypedDict is a generic class, and each constructor
+# call is a check of its keyword arguments against the field types. The
+# literals 1 and "x" are widened to int and str, as ty does for TypedDict
+# constructor inference.
+class int;
+class str;
+class Inner[T];
+class Outer[T];
+metavar ?I;
+metavar ?O;
+
+assert inner_value: int <: ?I;
+assert outer_inner: Inner[?I] <: Inner[?O];
+assert outer_marker: str <: ?O;
+assert outer_result: Outer[?O] <: Outer[int | str];

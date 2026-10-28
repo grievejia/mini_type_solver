@@ -1,0 +1,5 @@
+class a;
+class b;
+metavar ?T;
+assert require_a: tuple[tuple[a]] <: ?T;
+assert require_b: ?T <: tuple[tuple[b]];

@@ -1,0 +1,5 @@
+class N[-T];
+class C extends N[N[C]];
+metavar ?X;
+assert ?X <: N[?X] and N[?X] <: ?X;
+assert C <: ?X;

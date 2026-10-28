@@ -1,0 +1,25 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 9,
+    },
+    decls: [
+        Class(
+            ClassDecl {
+                span: Span {
+                    start: 0,
+                    end: 8,
+                },
+                name: Ident {
+                    span: Span {
+                        start: 6,
+                        end: 7,
+                    },
+                    name: "a",
+                },
+                parameters: None,
+                superclasses: [],
+            },
+        ),
+    ],
+}

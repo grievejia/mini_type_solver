@@ -1,0 +1,5 @@
+class int;
+class str;
+metavar ?U;
+assert int <: ?U;
+assert str <: ?U;

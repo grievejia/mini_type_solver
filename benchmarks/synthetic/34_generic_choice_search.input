@@ -1,0 +1,16 @@
+# verdict: satisfiable
+# ?F stores the generic identity. A choice (P) -> R holds when one X has
+# P <: X and X <: R. That needs P <: R. The first seven choices fail this test.
+# The final choice holds with X = A.
+class A;
+class B;
+metavar ?F;
+assert forall X. (X) -> X <: ?F;
+assert (?F <: (A) -> B)
+    or (?F <: (B) -> A)
+    or (?F <: (A) -> (A & B))
+    or (?F <: (B) -> (A & B))
+    or (?F <: (A | B) -> A)
+    or (?F <: (A | B) -> B)
+    or (?F <: (A | B) -> (A & B))
+    or (?F <: (A) -> A);

@@ -1,0 +1,44 @@
+# verdict: satisfiable
+# Source: ty mdtest call/function.md:184
+#   Call expression / Generic overloaded callable constraints in constructors
+# ty: `map(convert, ["a"])` should be map[Result[str]] (TODO, astral-sh/ty#2799).
+# Today ty reveals map[Unknown]. The test prose says the cause: an overload
+# that the constructor rejects leaves a mapping for its type variable, and that
+# mapping then rejects the accepted overload.
+#
+#   T = TypeVar("T", str, bytes)
+#   class Result(Generic[T])
+#   convert: overload of [T](value: T) -> Result[T]
+#                    and [T](value: Result[T]) -> Result[T]
+#   map.__new__(cls, func: Callable[[_T1], _S], iterable: Iterable[_T1], /) -> map[_S]
+#
+# The `map` call gives _T1 and _S fresh metavariables. `convert` is an
+# overloaded value checked against (?T1) -> ?S, so it is an `or` over its
+# signatures. Each signature is generic with the constrained T, so each keeps
+# its `forall` with the exact set {str, bytes}. The solver must pick a
+# signature and a member of the exact set. The list gives ?T1 the lower bound
+# str. The first signature with T = str fits. The second signature needs str
+# to fit Result[T], which fails for both members. The intended reveal is an
+# upper bound on the result, and map is invariant, so ?S must equal
+# Result[str].
+#
+# Overload order: for an argument of type str, only the first signature fits.
+# First match gives the same result as any match.
+# Variance: map and Result use legacy type variables without a variance flag,
+# so both are invariant.
+# Approximations: Iterable is a nominal class. Only the one-iterable overload of
+# `map.__new__` takes these arguments, so the other overloads and the `strict`
+# keyword are dropped. The display ["a"] has its own type, list[str].
+class str;
+class bytes;
+class Iterable[+T];
+class list[T] extends Iterable[T];
+class Result[T];
+class map[S];
+metavar ?T1;
+metavar ?S;
+
+assert map_func: (forall T in {str, bytes}. (T) -> Result[T] <: (?T1) -> ?S)
+    or (forall T in {str, bytes}. (Result[T]) -> Result[T] <: (?T1) -> ?S);
+assert map_iterable: list[str] <: Iterable[?T1];
+assert map_result: map[?S] <: map[Result[str]];

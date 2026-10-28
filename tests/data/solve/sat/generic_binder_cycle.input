@@ -1,0 +1,2 @@
+metavar ?T;
+assert forall X. (X) -> tuple[X] <: (?T) -> ?T;

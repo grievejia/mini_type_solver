@@ -1,0 +1,41 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/higher_order.rs:903
+#   test_nested_higher_order_overload
+# Pyrefly: `identity(identity)(f)` reveals
+# `Overload[(int) -> str, (str) -> int]`. `result(1)` has type str, and
+# `result("ok")` has type int.
+#
+#   identity[A, R](x: Callable[[A], R]) -> Callable[[A], R]
+#   f: overload of (int) -> str and (str) -> int
+#   result = identity(identity)(f)
+#
+# The revealed result has two branches, so each later call of `result` gets
+# its own metavariables (`int_` and `str_`). This is the same as Pyrefly
+# re-generalizing the call result. The outer `identity` gives A and R fresh
+# metavariables ?A and ?R. The inner `identity` is a generic value, so it
+# keeps its `forall`, and the solver selects its A and R. Calling the outer
+# result with `f` makes `f` a lower bound on ?A. `f` is an overloaded value,
+# so that bound is an `or` over its signatures. The later call of `result`
+# makes ?R fit the asserted callable. The selection inside the inner
+# `identity` is thus limited from two sides: by the `f` signature through
+# ?A, and by the later call through ?R.
+#
+# Overload order: for each later call, its argument rules out one signature
+# of `f`. At most one signature fits. First match gives the same result as
+# any match.
+class int;
+class str;
+metavar ?int_A;
+metavar ?int_R;
+metavar ?str_A;
+metavar ?str_R;
+
+# assert_type(result(1), str)
+assert int_identity: forall A, R. ((A) -> R) -> (A) -> R <: (?int_A) -> ?int_R;
+assert int_f: ((int) -> str <: ?int_A) or ((str) -> int <: ?int_A);
+assert int_call: ?int_R <: (int) -> str;
+
+# assert_type(result("ok"), int)
+assert str_identity: forall A, R. ((A) -> R) -> (A) -> R <: (?str_A) -> ?str_R;
+assert str_f: ((int) -> str <: ?str_A) or ((str) -> int <: ?str_A);
+assert str_call: ?str_R <: (str) -> int;

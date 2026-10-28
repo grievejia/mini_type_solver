@@ -1,0 +1,3 @@
+class number extends object;
+class int extends number;
+metavar ?T;

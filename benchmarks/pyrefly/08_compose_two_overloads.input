@@ -1,0 +1,43 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/higher_order.rs:1126
+#   test_two_overloaded_callables_cross_product
+# Pyrefly: `compose(parse, fmt)` reveals
+# `Overload[(str) -> str, (bytes) -> bytes]`.
+#
+#   compose[A, B, C](f: Callable[[A], B], g: Callable[[B], C]) -> Callable[[A], C]
+#   parse: overload of (str) -> int and (bytes) -> float
+#   fmt:   overload of (int) -> str and (float) -> bytes
+#
+# The revealed result has two branches. One instantiation of A, B, and C
+# cannot produce both, so each result branch gets its own metavariables (`s_`
+# and `b_`). Each overloaded argument is an `or` over its signatures, and the
+# result branch is the expected type of the call. B links the two choices:
+# the `parse` signature fixes a lower bound on B, and the `fmt` signature
+# must accept B.
+#
+# Overload order: Python promotes int to float, so both `fmt` signatures
+# accept an int. Under first match, B = int selects (int) -> str. This
+# unordered encoding also derives a third branch, (str) -> bytes, through
+# (float) -> bytes. Pyrefly does not reveal that branch. The assertions
+# below use only the two branches that Pyrefly reveals. Each of them fixes
+# the `fmt` signature through its return type.
+class float;
+class int extends float;
+class str;
+class bytes;
+metavar ?s_A;
+metavar ?s_B;
+metavar ?s_C;
+metavar ?b_A;
+metavar ?b_B;
+metavar ?b_C;
+
+# Result branch (str) -> str
+assert s_parse: ((str) -> int <: (?s_A) -> ?s_B) or ((bytes) -> float <: (?s_A) -> ?s_B);
+assert s_fmt: ((int) -> str <: (?s_B) -> ?s_C) or ((float) -> bytes <: (?s_B) -> ?s_C);
+assert s_result: (?s_A) -> ?s_C <: (str) -> str;
+
+# Result branch (bytes) -> bytes
+assert b_parse: ((str) -> int <: (?b_A) -> ?b_B) or ((bytes) -> float <: (?b_A) -> ?b_B);
+assert b_fmt: ((int) -> str <: (?b_B) -> ?b_C) or ((float) -> bytes <: (?b_B) -> ?b_C);
+assert b_result: (?b_A) -> ?b_C <: (bytes) -> bytes;

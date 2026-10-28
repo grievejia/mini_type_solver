@@ -1,0 +1,27 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/constructors.rs:1254
+#   test_hint_and_bound_interaction
+# Pyrefly: `C([1, 2])` has type C[int].
+#
+#   class C[T: int | list[str]]:
+#       def __new__(cls, data: T | Sequence[T]) -> Self
+#
+# The call gives T a fresh metavariable with its bound as one assertion. The
+# argument must fit one arm of `T | Sequence[T]`. If it fits the bare T arm,
+# the bound needs list[int] <: list[str], which fails. Only the Sequence[T]
+# arm works, with T = int. The `assert_type` is an upper bound on the result.
+#
+# Variance: T appears only in `__new__`. Pyrefly skips `__new__` and
+# `__init__` during variance inference and treats a parameter with no
+# evidence as invariant, so C is invariant here.
+# Approximation: the list display has its own type, list[int].
+class int;
+class str;
+class Sequence[+T];
+class list[T] extends Sequence[T];
+class C[T];
+metavar ?T;
+
+assert data: list[int] <: ?T | Sequence[?T];
+assert bound: ?T <: int | list[str];
+assert result: C[?T] <: C[int];

@@ -1,0 +1,3 @@
+satisfiable
+model:
+  ?T = a & b | c

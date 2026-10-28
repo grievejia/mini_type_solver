@@ -1,0 +1,291 @@
+ParsedFile {
+    span: Span {
+        start: 0,
+        end: 121,
+    },
+    decls: [
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 0,
+                    end: 49,
+                },
+                label: None,
+                formula: And(
+                    Nary {
+                        span: Span {
+                            start: 7,
+                            end: 48,
+                        },
+                        first: Paren(
+                            Paren {
+                                span: Span {
+                                    start: 7,
+                                    end: 31,
+                                },
+                                inner: Or(
+                                    Nary {
+                                        span: Span {
+                                            start: 8,
+                                            end: 30,
+                                        },
+                                        first: Subtype(
+                                            Subtype {
+                                                span: Span {
+                                                    start: 8,
+                                                    end: 17,
+                                                },
+                                                left: Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 8,
+                                                            end: 11,
+                                                        },
+                                                        name: "int",
+                                                    },
+                                                ),
+                                                right: MetaName(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 15,
+                                                            end: 17,
+                                                        },
+                                                        name: "T",
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                        second: (
+                                            Span {
+                                                start: 18,
+                                                end: 20,
+                                            },
+                                            Subtype(
+                                                Subtype {
+                                                    span: Span {
+                                                        start: 21,
+                                                        end: 30,
+                                                    },
+                                                    left: Name(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 21,
+                                                                end: 24,
+                                                            },
+                                                            name: "str",
+                                                        },
+                                                    ),
+                                                    right: MetaName(
+                                                        Ident {
+                                                            span: Span {
+                                                                start: 28,
+                                                                end: 30,
+                                                            },
+                                                            name: "T",
+                                                        },
+                                                    ),
+                                                },
+                                            ),
+                                        ),
+                                        rest: [],
+                                    },
+                                ),
+                            },
+                        ),
+                        second: (
+                            Span {
+                                start: 32,
+                                end: 35,
+                            },
+                            Subtype(
+                                Subtype {
+                                    span: Span {
+                                        start: 36,
+                                        end: 48,
+                                    },
+                                    left: MetaName(
+                                        Ident {
+                                            span: Span {
+                                                start: 36,
+                                                end: 38,
+                                            },
+                                            name: "T",
+                                        },
+                                    ),
+                                    right: Name(
+                                        Ident {
+                                            span: Span {
+                                                start: 42,
+                                                end: 48,
+                                            },
+                                            name: "object",
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                        rest: [],
+                    },
+                ),
+            },
+        ),
+        Assert(
+            AssertDecl {
+                span: Span {
+                    start: 50,
+                    end: 120,
+                },
+                label: None,
+                formula: Or(
+                    Nary {
+                        span: Span {
+                            start: 57,
+                            end: 119,
+                        },
+                        first: And(
+                            Nary {
+                                span: Span {
+                                    start: 57,
+                                    end: 80,
+                                },
+                                first: Subtype(
+                                    Subtype {
+                                        span: Span {
+                                            start: 57,
+                                            end: 66,
+                                        },
+                                        left: Name(
+                                            Ident {
+                                                span: Span {
+                                                    start: 57,
+                                                    end: 60,
+                                                },
+                                                name: "int",
+                                            },
+                                        ),
+                                        right: MetaName(
+                                            Ident {
+                                                span: Span {
+                                                    start: 64,
+                                                    end: 66,
+                                                },
+                                                name: "T",
+                                            },
+                                        ),
+                                    },
+                                ),
+                                second: (
+                                    Span {
+                                        start: 67,
+                                        end: 70,
+                                    },
+                                    Subtype(
+                                        Subtype {
+                                            span: Span {
+                                                start: 71,
+                                                end: 80,
+                                            },
+                                            left: Name(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 71,
+                                                        end: 74,
+                                                    },
+                                                    name: "str",
+                                                },
+                                            ),
+                                            right: MetaName(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 78,
+                                                        end: 80,
+                                                    },
+                                                    name: "T",
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                ),
+                                rest: [],
+                            },
+                        ),
+                        second: (
+                            Span {
+                                start: 81,
+                                end: 83,
+                            },
+                            And(
+                                Nary {
+                                    span: Span {
+                                        start: 84,
+                                        end: 119,
+                                    },
+                                    first: Subtype(
+                                        Subtype {
+                                            span: Span {
+                                                start: 84,
+                                                end: 96,
+                                            },
+                                            left: MetaName(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 84,
+                                                        end: 86,
+                                                    },
+                                                    name: "T",
+                                                },
+                                            ),
+                                            right: Name(
+                                                Ident {
+                                                    span: Span {
+                                                        start: 90,
+                                                        end: 96,
+                                                    },
+                                                    name: "number",
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                    second: (
+                                        Span {
+                                            start: 97,
+                                            end: 100,
+                                        },
+                                        Subtype(
+                                            Subtype {
+                                                span: Span {
+                                                    start: 101,
+                                                    end: 119,
+                                                },
+                                                left: MetaName(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 101,
+                                                            end: 103,
+                                                        },
+                                                        name: "T",
+                                                    },
+                                                ),
+                                                right: Name(
+                                                    Ident {
+                                                        span: Span {
+                                                            start: 107,
+                                                            end: 119,
+                                                        },
+                                                        name: "serializable",
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                    ),
+                                    rest: [],
+                                },
+                            ),
+                        ),
+                        rest: [],
+                    },
+                ),
+            },
+        ),
+    ],
+}

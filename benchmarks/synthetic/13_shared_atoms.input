@@ -1,0 +1,14 @@
+# verdict: satisfiable
+# Shared atoms: the same three atoms recur across four assertions.
+# The model assigns ?T = p. After hash-consing there are only
+# three distinct interned atoms, so the activated set stays small
+# across the branches that the engines visit.
+class q;
+class p extends q;
+class r;
+class s;
+metavar ?T;
+assert b1: (p <: ?T) or (r <: s);
+assert b2: (p <: ?T) or (r <: s);
+assert b3: (?T <: q) or (r <: s);
+assert b4: (?T <: q) or (r <: s);

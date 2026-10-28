@@ -1,0 +1,19 @@
+class Animal;
+class Dog extends Animal;
+class Inv[T];
+class Co[+T];
+class Child[T] extends Co[tuple[T]];
+class Pair[L, R];
+metavar ?Arg;
+metavar ?Nested;
+metavar ?Overlap;
+metavar ?Empty;
+metavar ?Retained;
+metavar ?Inactive;
+
+assert Inv[?Arg] <: Inv[Dog];
+assert Pair[Child[?Arg], ((Dog) -> Animal) | Inv[?Arg]] <: ?Nested;
+assert Inv[Dog] & Inv[Animal] <: ?Overlap;
+assert Inv[never] <: ?Empty;
+assert forall X. () -> Inv[forall Z. (Z) -> X] <: ?Retained;
+assert (object <: object) or (Inv[never] <: ?Inactive);

@@ -1,0 +1,2 @@
+class b;
+class a extends object, b;

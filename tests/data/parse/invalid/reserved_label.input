@@ -1,0 +1,1 @@
+assert class: a <: b;

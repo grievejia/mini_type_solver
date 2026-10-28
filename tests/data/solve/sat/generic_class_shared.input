@@ -1,0 +1,9 @@
+class Dog;
+class Inv[T];
+metavar ?Exact;
+metavar ?Negative;
+
+assert exact: forall X. (X) -> Inv[X] <: (Dog) -> ?Exact;
+assert negative: forall X. (X) -> tuple[(Inv[X]) -> object, (Inv[X]) -> object]
+    <: forall Y. (Y) -> ?Negative;
+assert demand: ?Negative <: tuple[(Inv[object]) -> object, (Inv[object]) -> object];

@@ -1,0 +1,24 @@
+# verdict: satisfiable
+# Source: pyrefly/lib/test/contextual.rs:862
+#   test_concat_custom_vecs
+# Pyrefly: `_0: Vec[A | B] = concat_vecs(left, right)` is accepted.
+#
+#   class Vec[T]  (invariant)
+#   concat_vecs[T1, T2](left: Vec[T1], right: Vec[T2]) -> Vec[T1 | T2]
+#   left: Vec[A], right: Vec[B]
+#
+# The call gives T1 and T2 fresh metavariables. Each argument check is one
+# assertion, and the declared type of `_0` is the expected return type.
+# Invariance makes each argument fix one metavariable exactly. The return
+# puts a union of the two metavariables inside an invariant argument. That
+# union must equal A | B. The expected type alone does not decide how
+# A | B splits between T1 and T2. Only the arguments decide it.
+class A;
+class B;
+class Vec[T];
+metavar ?T1;
+metavar ?T2;
+
+assert left: Vec[A] <: Vec[?T1];
+assert right: Vec[B] <: Vec[?T2];
+assert result: Vec[?T1 | ?T2] <: Vec[A | B];
